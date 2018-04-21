@@ -4,6 +4,7 @@
 # 版本
 | 序号   | 日期         | 修订内容                                     | 修订人    |
 | ---- | ---------- | ---------------------------------------- | ------ |
+| 16   | 2018-04-21 | 补充描述内容, 增加部分接口 json 例子              | 朱一凡     |
 | 15   | 2018-04-18 | 添加支持的币种及小数位数              | 朱一凡     |
 | 14   | 2018-02-29 | 回调地址增加手续费扣费币种              | 朱一凡     |
 | 13   | 2018-02-29 | 将所有接口的int或者float类型全转为string              | 王东     |
@@ -21,17 +22,33 @@
 | 1    | 2018-01-24 | sdk 3.0 文档初始版                            | 朱一凡    |
 
 
-# 鉴权参数
+
+
+# 关键信息
+
+## 参数类型
+接口类型仅包括三种入参类型:
+* 字符串型 **String**
+* 数字型 **Number**
+* 对象 **Object**
+* 数组 **Array**
+
+## 鉴权参数
 所有接口(包括回调)需要附带以下三个鉴权限参数:
 
 | 名字           | 类型     | 说明            |
 | ------------ | ------ | ------------- |
 | key          | String |               |
-| sign         | String | 签名            |
+| sign         | String | 生成的签名            |
 | request_time | Number | 请求时间戳, 防止重放攻击 |
+
 后面接口中不再重复列出
 
-# 返回错误码
+签名生成规则:
+
+(等待补充)
+
+## 结构说明
 
 返回均包在以下结构的 data 中
 
@@ -40,7 +57,7 @@
 | err_code   | String          | 错误编码, 用于 i18n. (正确时为空字符) |
 | err_info   | String          | 错误说明. (正确时为空字符)          |
 | request_id | Number          | 请求id, 用于定位该请求            |
-| data       | Object or Array | 返回值                      |
+| data       | Object 或者 Array | 返回值                      |
 
 ```json
 { 
@@ -52,16 +69,36 @@
 
 后面接口只列出 data 中内容
 
+##  json 风格
+
+参看上面的例子, 属性名遵照以下风格:
+
+* 一律小写
+* 下划线分割单词
+
+# 接口列表
+
+接口一律使用 `POST` 方式交互
+
 ## 申请地址
 
-`/api/v3/address`
+[htts://api.dabank.io/api/v3/address](htts://api.dabank.io/api/v3/address)
 
-request POST:
+* request:
 
 | 名称      | 类型     | 说明   |
 | ------- | ------ | ---- |
 | symbol  | String | 币种   |
 | user_id | String | 用户id |
+```json
+{  
+   "key":"bigzhu",
+   "request_time":"1524290015",
+   "sign":"xxxx",
+   "symbol":"TRX",
+   "user_id":"1234"
+}
+```
 
 response:
 
@@ -69,9 +106,20 @@ response:
 | ------- | ------ | ---- |
 | address | String | 地址   |
 
+```json
+{
+   "err_code":"",
+   "err_info":"",
+   "data":{  
+      "address":"0x12345678910388342390012323"
+   },
+   "request_id":233049
+}
+```
+
 ## 转账
 
-`/api/v3/transfer`
+[htts://api.dabank.io/api/v3/transfer](htts://api.dabank.io/api/v3/transfer)
 
 request POST:
 
@@ -83,6 +131,18 @@ request POST:
 | from      | String | 转出地址                                     |
 | unique_id | String | 调用方生成对本操作的唯一id. 出现接口调用超时等情况, 第二次重复调用时需要与第一次id保持一致, 以此避免因超时重复调用导致的重复转账 |
 
+```json
+{  
+   "unique_id":"123",
+   "to":"123",
+   "sign":"98277e8d22205579a68e736e36832dcd",
+   "coins":"2.54957926",
+   "symbol":"ETH",
+   "from":"123",
+   "request_time":"1524298182",
+   "key":"bigzhu"
+}
+```
 
 response:
 
@@ -95,9 +155,23 @@ response:
 - 如果客户提币地址要求 address+paymenid 的形式, `to` 参数设置成 `address$payment_id` 即可， 即用`$`连接 `to` 和 `paymentid`, 例如:`9wHNWjJ1Gnw7Yw1RjDLNiJ8yJw91xFCz4NvXCcQjzceiGqFXDcXuCqPckgi7pn1LA4FZ5EaAUd19meb8GXxCp3iFT2yZViw$662f879677b96d0919db4ae069d985e5e3dcf10c8429ed395a9a6e798bb4f9d1`
 - 如果不设置`paymentid`, 则不带$符号, 直接传入集成地址
 
+```json
+{  
+   "err_code":"",
+   "err_info":"",
+   "data":{  
+      "status":"TRANSFER_PENDING",
+      "transfer_id":123
+   },
+   "request_id":233114
+}
+```
+
+
 ## 成功账单查询
 
 `/api/v3/transfers/success`
+[htts://api.dabank.io/api/v3/transfers/success](htts://api.dabank.io/api/v3/transfers/success)
 
 request POST:
 
@@ -137,7 +211,7 @@ transer 对象结构:
 
 ## 在途账单查询
 
-`/api/v3/transfers/pending`
+[htts://api.dabank.io/api/v3/transfers/pending](htts://api.dabank.io/api/v3/transfers/pending)
 
 request POST:
 
@@ -176,7 +250,7 @@ transer 对象结构:
 
 ## 账单总和
 
-`/api/v3/transfers/sum`
+[htts://api.dabank.io/api/v3/transfers/sum](htts://api.dabank.io/api/v3/transfers/sum)
 
 request POST:
 
@@ -210,7 +284,13 @@ data 里为 Array
 | symbol  | String | 币种            |
 | balance | String | 余额. 精度为小数点后8位 |
 
-# SDK回调接口
+# 回调
+
+以下三种情况, 会回调接口进行通知:
+
+* 转出, 确认数变化
+* 转出, 转账成功后
+* 转入
 
 request POST:
 
@@ -230,11 +310,87 @@ request POST:
 | fee           | String | 手续费                                      |
 | fee_symbol           | String | 手续费扣费币种                                      |
 
+* 转出, 确认数变化
+
+```json
+{  
+   "transfer_id":"1365850",
+   "symbol":"BTC",
+   "tx_id":"7cee2e2055c85d40ab27f713d1bbcd7db2d07a8ab54483e7c423ed6cdc689007",
+   "confirms":"2",
+   "transfer_at":"1524298179",
+   "confirm_at":"1524299426",
+   "transfer_type":"OUT",
+   "status":"TRANSFER_PENDING",
+   "to":"1A3x2pU6gJKJAzc6XiZHKLhkBWSH6QkQo8",
+   "from":"1G2BLexgX5dYwuzagBuSEp43Wy7Jgmm1mw",
+   "coins":"2.73604069",
+   "fee":"0.001",
+   "fee_symbol":"BTC",
+   "request_time":"1524299426",
+   "key":"bigzhu",
+   "sign":"123"
+}
+```
+* 转出, 转账成功后
+
+```json
+{  
+   "transfer_id":"1365848",
+   "symbol":"MGD",
+   "tx_id":"bc2929b14ea303e198517d1550e30e1b8125f5f16fb373f7407f8a48cf605c7a",
+   "confirms":"3",
+   "transfer_at":"1524293497",
+   "confirm_at":"1524294491",
+   "transfer_type":"OUT",
+   "status":"TRANSFER_SUCCESSFUL",
+   "to":"MHBLixzhMs4RCfudx2jttU1SesxkjLxUrF",
+   "from":"MPfFsz7GTSi4vQ5XEbMVRAZ67tDd6sQD21",
+   "coins":"999.9",
+   "fee":"0.001",
+   "fee_symbol":"MGD",
+   "request_time":"1524294491",
+   "key":"bigzhu",
+   "sign":"123"
+}
+```
+
+* 转入
+
+```json
+{  
+   "transfer_id":"1365849",
+   "symbol":"ETH",
+   "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
+   "confirms":"13",
+   "transfer_at":"1524296032",
+   "confirm_at":"1524296243",
+   "transfer_type":"IN",
+   "status":"TRANSFER_SUCCESSFUL",
+   "to":"0xc03db2681719eb3d41aa8ef5b23e11341fba57f0",
+   "from":"",
+   "coins":"2.997",
+   "fee":"0",
+   "fee_symbol":"ETH",
+   "request_time":"1524296243",
+   "key":"bigzhu",
+   "sign":"123"
+}
+```
+
 response:
+
+接口需要按照正确格式返回成功, 否则会一直重试
 
 | 名字     | 类型     | 说明                       |
 | ------ | ------ | ------------------------ |
 | result | String | 成功时为 "Success", 失败时为错误信息 |
+
+```json
+{  
+   "result":"Success"
+}
+```
 
 # 支持的币种以及小数位数
 
