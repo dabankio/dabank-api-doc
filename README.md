@@ -44,9 +44,14 @@
 
 后面接口中不再重复列出
 
-签名生成规则:
+签名生成规则步骤:
 
-(等待补充)
+1. 取出 JSON 中所有 key-value 对中的 value, 放入数组 values
+1. 将分配的 secret 放入数组 values
+1. 对 values 进行字典序排序
+1. 使用下划线`_` 连接 values 内的所有值, 得到字符串 content
+1. 对 content 进行 md5，得到签名 `sign`
+1. 将 `sign` 放入 JSON，完成。
 
 ## 结构说明
 
