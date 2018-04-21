@@ -170,7 +170,6 @@ response:
 
 ## 成功账单查询
 
-`/api/v3/transfers/success`
 [htts://api.dabank.io/api/v3/transfers/success](htts://api.dabank.io/api/v3/transfers/success)
 
 request POST:
