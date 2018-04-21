@@ -38,7 +38,7 @@
 
 | 名字           | 类型     | 说明            |
 | ------------ | ------ | ------------- |
-| key          | String |               |
+| key          | String | 身份识别关键字              |
 | sign         | String | 生成的签名            |
 | request_time | Number | 请求时间戳, 防止重放攻击 |
 
