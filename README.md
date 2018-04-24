@@ -135,7 +135,7 @@ response:
 | transfer_id | String | 交易id. 请存储, 用于交易确认后回调关联                   |
 | status      | String | TRANSFER_SUCCESSFUL(成功) 或 TRANSFER_PENDING(在途) |
 
-针对门罗币的特殊说明:
+针对门罗币(XMR)的特殊说明:
 - 如果客户提币地址要求 address+paymenid 的形式, `to` 参数设置成 `address$payment_id` 即可， 即用`$`连接 `to` 和 `paymentid`, 例如:`9wHNWjJ1Gnw7Yw1RjDLNiJ8yJw91xFCz4NvXCcQjzceiGqFXDcXuCqPckgi7pn1LA4FZ5EaAUd19meb8GXxCp3iFT2yZViw$662f879677b96d0919db4ae069d985e5e3dcf10c8429ed395a9a6e798bb4f9d1`
 - 如果不设置`paymentid`, 则不带$符号, 直接传入集成地址
 
