@@ -1,8 +1,6 @@
 ![logo](LOGO.svg)
 
 
-
-
 # 关键信息
 
 ## 参数类型
@@ -17,8 +15,8 @@
 
 | 名字           | 类型     | 说明            |
 | ------------ | ------ | ------------- |
-| key          | String | 身份识别关键字              |
-| sign         | String | 生成的签名            |
+| key          | String | 身份识别关键字       |
+| sign         | String | 生成的签名         |
 | request_time | Number | 请求时间戳, 防止重放攻击 |
 
 后面接口中不再重复列出
@@ -26,11 +24,11 @@
 签名生成规则步骤:
 
 1. 取出 JSON 中所有 key-value 对中的 value, 放入数组 values
-1. 将分配的 secret 放入数组 values
-1. 对 values 进行字典序排序
-1. 使用下划线`_` 连接 values 内的所有值, 得到字符串 content
-1. 对 content 进行 md5，得到签名 `sign`
-1. 将 `sign` 放入 JSON，完成。
+2. 将分配的 secret 放入数组 values
+3. 对 values 进行字典序排序
+4. 使用下划线`_` 连接 values 内的所有值, 得到字符串 content
+5. 对 content 进行 md5，得到签名 `sign`
+6. 将 `sign` 放入 JSON，完成。
 
 ## 结构说明
 
@@ -70,10 +68,10 @@
 
 * request:
 
-| 名称      | 类型     | 说明   |
-| ------- | ------ | ---- |
-| symbol  | String | 币种   |
-| user_id | String | 用户id |
+| 名称      | 类型     | 必传   | 说明   |
+| ------- | ------ | ---- | ---- |
+| symbol  | String | ✓    | 币种   |
+| user_id | String | ✓    | 用户id |
 ```json
 {  
    "key":"bigzhu",
@@ -107,13 +105,13 @@ response:
 
 request POST:
 
-| 名称        | 类型     | 说明                                       |
-| --------- | ------ | ---------------------------------------- |
-| symbol    | String | 币种                                       |
-| coins     | String | 转账币数. 精度为小数点后8位                          |
-| to        | String | 转入目标地址                                   |
-| from      | String | 转出地址                                     |
-| unique_id | String | 调用方生成对本操作的唯一id. 出现接口调用超时等情况, 第二次重复调用时需要与第一次id保持一致, 以此避免因超时重复调用导致的重复转账 |
+| 名称        | 类型     | 必传   | 说明                                       |
+| --------- | ------ | ---- | ---------------------------------------- |
+| symbol    | String | ✓    | 币种                                       |
+| coins     | String | ✓    | 转账币数. 精度为小数点后8位                          |
+| to        | String | ✓    | 转入目标地址                                   |
+| from      | String | ✓    | 转出地址                                     |
+| unique_id | String | ✓    | 调用方生成对本操作的唯一id. 出现接口调用超时等情况, 第二次重复调用时需要与第一次id保持一致, 以此避免因超时重复调用导致的重复转账 |
 
 ```json
 {  
@@ -158,18 +156,31 @@ response:
 
 request POST:
 
-| 名称            | 类型     | 说明                  |
-| ------------- | ------ | ------------------- |
-| transfer_type | String | 交易类型 IN(转入) OUT(转出) |
-| symbol        | String | 币种                  |
-| limit         | String | 一页几条                |
-| p             | String | 第几页                 |
-| start_at      | String | 开始时间(可选)            |
-| end_at        | String | 结束时间(可选)            |
-| address       | String | 转入地址(可选)            |
+| 名称            | 类型     | 必传   | 说明                  |
+| ------------- | ------ | ---- | ------------------- |
+| transfer_type | String | ✓    | 交易类型 IN(转入) OUT(转出) |
+| symbol        | String | ✓    | 币种                  |
+| limit         | String | ✓    | 一页几条                |
+| p             | String | ✓    | 第几页                 |
+| start_at      | String | ✗    | 开始时间(可选)            |
+| end_at        | String | ✗    | 结束时间(可选)            |
+| address       | String | ✗    | 转入地址(可选)            |
 
 若要限定时间, start_at 与 end_at 必须同时传入, 否则当做未传入处理
-
+```json
+{  
+   "key":"bigzhu",
+   "request_time":"1524290015",
+   "sign":"xxxx",
+   "transfer_type":"OUT",
+   "symbol":"ETH",
+   "limit":"20",
+   "p":"1",
+   "start_at":"1522553241",
+   "end_at":"1524539191",
+   "address":"0x12345678910388342390012323"
+}
+```
 
 response:
 
@@ -191,6 +202,34 @@ transer 对象结构:
 | tx_id        | String | 链上交易的唯一标示       |
 | fee          | String | 手续费             |
 
+```json
+{  
+   "total":"202",
+   "transfers":{
+    [
+     "transfer_id":"123",
+     "symbol":"ETH",
+     "to":"0x12345678910388342390012323",
+     "from":"0x12345678910388342390012321",
+     "coins":"2.54957926",
+     "confirmed_at":"1524539191",
+     "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
+     "fee":"0.001"
+    ],
+     [
+     "transfer_id":"124",
+     "symbol":"ETH",
+     "to":"0x12345678910388342390012323",
+     "from":"0x12345678910388342390012321",
+     "coins":"3.2326",
+     "confirmed_at":"1524539191",
+     "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
+     "fee":"0.001"
+    ],
+     .....
+  }
+}
+```
 
 ## 在途账单查询
 
@@ -198,17 +237,32 @@ transer 对象结构:
 
 request POST:
 
-| 名称            | 类型     | 说明                  |
-| ------------- | ------ | ------------------- |
-| transfer_type | String | 交易类型 IN(转入) OUT(转出) |
-| symbol        | String | 币种                  |
-| limit         | String | 一页几条                |
-| p             | String | 第几页                 |
-| start_at      | String | 开始时间(可选)            |
-| end_at        | String | 结束时间(可选)            |
-| address       | String | 转入地址(可选)            |
+| 名称            | 类型     | 必传   | 说明                  |
+| ------------- | ------ | ---- | ------------------- |
+| transfer_type | String | ✓    | 交易类型 IN(转入) OUT(转出) |
+| symbol        | String | ✓    | 币种                  |
+| limit         | String | ✓    | 一页几条                |
+| p             | String | ✓    | 第几页                 |
+| start_at      | String | ✗    | 开始时间(可选)            |
+| end_at        | String | ✗    | 结束时间(可选)            |
+| address       | String | ✗    | 转入地址(可选)            |
 
 若要限定时间, start_at 与 end_at 必须同时传入, 否则当做未传入处理
+
+```json
+{  
+   "key":"bigzhu",
+   "request_time":"1524290015",
+   "sign":"xxxx",
+   "transfer_type":"OUT",
+   "symbol":"ETH",
+   "limit":"20",
+   "p":"1",
+   "start_at":"1522553241",
+   "end_at":"1524539191",
+   "address":"0x12345678910388342390012323"
+}
+```
 
 
 response:
@@ -231,18 +285,58 @@ transer 对象结构:
 | fee         | String | 手续费             |
 | confirms    | String | 当前确认数           |
 
+```json
+{  
+   "total":"32",
+   "transfers":{
+    [
+     "transfer_id":"123",
+     "symbol":"ETH",
+     "to":"0x12345678910388342390012323",
+     "from":"0x12345678910388342390012321",
+     "coins":"2.54957926",
+     "transfer_at":"1524539191",
+     "fee":"0.001",
+     "confirms":"1"
+    ],
+     [
+     "transfer_id":"124",
+     "symbol":"ETH",
+     "to":"0x12345678910388342390012323",
+     "from":"0x12345678910388342390012321",
+     "coins":"3.2326",
+     "transfer_at":"1524539191",
+     "fee":"0.001",
+     "confirms":"1"
+    ],
+     .....
+  }
+}
+```
 ## 账单总和
 
 [htts://api.dabank.io/api/v3/transfers/sum](htts://api.dabank.io/api/v3/transfers/sum)
 
 request POST:
 
-| 名称            | 类型     | 说明                  |
-| ------------- | ------ | ------------------- |
-| symbol        | String | 币种                  |
-| start_at      | String | 开始时间(可选)            |
-| end_at        | String | 结束时间(可选)            |
-| transfer_type | String | 转账类型 IN(转入) OUT(转出) |
+| 名称            | 类型     | 必传   | 说明                  |
+| ------------- | ------ | ---- | ------------------- |
+| symbol        | String | ✓    | 币种                  |
+| start_at      | String | ✗    | 开始时间(可选)            |
+| end_at        | String | ✗    | 结束时间(可选)            |
+| transfer_type | String | ✓    | 转账类型 IN(转入) OUT(转出) |
+
+```json
+{  
+   "key":"bigzhu",
+   "request_time":"1524290015",
+   "sign":"xxxx",
+   "symbol":"ETH",
+   "start_at":"1522553241",
+   "end_at":"1524539191",
+   "transfer_type":"OUT"
+}
+```
 
 response:
 
@@ -250,13 +344,30 @@ response:
 | ----- | ------ | --------------- |
 | coins | String | 转账币数. 精度为小数点后8位 |
 
+```json
+{  
+   "coins":"2233.434944"
+}
+```
+
 ## 查询 APP 账户信息
+
+[htts://api.dabank.io/api/v3/appAccount](htts://api.dabank.io/api/v3/appAccount)
 
 request POST:
 
-| 名称     | 类型     | 说明               |
-| ------ | ------ | ---------------- |
-| symbol | String | 币种(可选, 不传时查所有币种) |
+| 名称     | 类型     | 必传   | 说明               |
+| ------ | ------ | ---- | ---------------- |
+| symbol | String | ✓    | 币种(可选, 不传时查所有币种) |
+
+```json
+{  
+  "key":"bigzhu",
+  "request_time":"1524290015",
+  "sign":"xxxx",
+  "symbol":"ETH"
+}
+```
 
 response:
 
@@ -265,7 +376,61 @@ data 里为 Array
 | 名称      | 类型     | 说明            |
 | ------- | ------ | ------------- |
 | symbol  | String | 币种            |
+| address | String | 地址            |
 | balance | String | 余额. 精度为小数点后8位 |
+
+```json
+{  
+  [
+  "symbol":"ETH",
+  "address":"0x12345678910388342390012321",
+  "balance":"234.5"
+  ],
+  [
+  "symbol":"BTC",
+  "address":"0x123456789103883423900123242",
+  "balance":"2.5"
+  ],
+  ....
+}
+```
+
+## 验证钱包地址正确性
+
+[htts://api.dabank.io/api/v3/checkAddress](htts://api.dabank.io/api/v3/checkAddress)
+
+request POST:
+
+| 名称      | 类型     | 必传   | 说明   |
+| ------- | ------ | ---- | ---- |
+| symbol  | String | ✓    | 币种   |
+| address | String | ✓    | 钱包地址 |
+
+```json
+{  
+  "key":"bigzhu",
+  "request_time":"1524290015",
+  "sign":"xxxx",
+  "symbol":"ETH",
+  "address":"0x12345678910388342390012321"
+}
+```
+
+response:
+
+| 名称      | 类型     | 说明                          |
+| ------- | ------ | --------------------------- |
+| verify  | String | 验证结果，成功(Success)失败(Failure) |
+| err_msg | String | 错误信息,verify成功时,此字段为空        |
+
+```json
+{  
+  "verify":"Failure",
+  "err_msg":"err info"
+}
+```
+
+# 
 
 # 回调
 
@@ -291,7 +456,7 @@ request POST:
 | from          | String | 转出地址, 类型为转入(IN)时可能为空                     |
 | coins         | String | 转账币数. 精度为小数点后8位                          |
 | fee           | String | 手续费                                      |
-| fee_symbol           | String | 手续费扣费币种                                      |
+| fee_symbol    | String | 手续费扣费币种                                  |
 
 * 转出, 确认数变化
 
@@ -377,42 +542,44 @@ response:
 
 # 支持的币种以及小数位数
 
-|          |            | 
-|----------|------------| 
-| symbol | decimals | 
-| USO    | 8          | 
-| KEY    | 8         | 
-| CRE    | 8         | 
-| RUFF   | 8         | 
-| CDY    | 8          | 
-| THM    | 8         | 
-| RED    | 8         | 
-| BCH    | 8          | 
-| LMC    | 6          | 
-| BNB    | 8         | 
-| DCON   | 0          | 
-| BTK    | 8         | 
-| USDT   | 6          | 
-| MGD    | 8          | 
-| ZRX    | 8         | 
-| LTC    | 8          | 
-| XMC    | 0          | 
-| XMR    | 8         | 
-| IOST   | 8         | 
-| CFUN   | 8          | 
-| EOS    | 8         | 
-| ALI    | 8         | 
-| BTM    | 8          | 
-| BTC    | 8          | 
-| QTUM   | 8          | 
-| ETH    | 8         | 
+|        |          |
+| ------ | -------- |
+| symbol | decimals |
+| USO    | 8        |
+| KEY    | 8        |
+| CRE    | 8        |
+| RUFF   | 8        |
+| CDY    | 8        |
+| THM    | 8        |
+| RED    | 8        |
+| BCH    | 8        |
+| LMC    | 6        |
+| BNB    | 8        |
+| DCON   | 0        |
+| BTK    | 8        |
+| USDT   | 6        |
+| MGD    | 8        |
+| ZRX    | 8        |
+| LTC    | 8        |
+| XMC    | 0        |
+| XMR    | 8        |
+| IOST   | 8        |
+| CFUN   | 8        |
+| EOS    | 8        |
+| ALI    | 8        |
+| BTM    | 8        |
+| BTC    | 8        |
+| QTUM   | 8        |
+| ETH    | 8        |
 
 # 版本
+
 | 序号   | 日期         | 修订内容                                     | 修订人    |
 | ---- | ---------- | ---------------------------------------- | ------ |
-| 16   | 2018-04-21 | 补充描述内容, 增加部分接口 json 例子              | 朱一凡     |
-| 15   | 2018-04-18 | 添加支持的币种及小数位数              | 朱一凡     |
-| 14   | 2018-02-29 | 回调地址增加手续费扣费币种              | 朱一凡     |
+| 17   | 2018-04-24 | 验证钱包地址正确性                                | 王东     |
+| 16   | 2018-04-21 | 补充描述内容, 增加部分接口 json 例子                   | 朱一凡    |
+| 15   | 2018-04-18 | 添加支持的币种及小数位数                             | 朱一凡    |
+| 14   | 2018-02-29 | 回调地址增加手续费扣费币种                            | 朱一凡    |
 | 13   | 2018-02-29 | 将所有接口的int或者float类型全转为string              | 王东     |
 | 12   | 2018-02-28 | transfer 接口增加  unique_id, 以避免重复处理        | 朱一凡    |
 | 11   | 2018-02-28 | 返回request_id, 回调增加确认数                    | 朱一凡    |
@@ -426,6 +593,4 @@ response:
 | 3    | 2018-01-24 | 转账需要指定转出地址, 转账账单查询分开传递转入转出地址             | 王东 朱一凡 |
 | 2    | 2018-01-24 | 转账账单查询返回手续费                              | 朱一凡    |
 | 1    | 2018-01-24 | sdk 3.0 文档初始版                            | 朱一凡    |
-
-
 
