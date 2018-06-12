@@ -1,4 +1,4 @@
-![logo](https://cdn.golangme.com/static/img/carousel/golangroutines.png)
+![logo](LOGO.svg)
 
 
 
