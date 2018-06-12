@@ -1,4 +1,4 @@
-![logo](LOGO.svg)
+![logo](./LOGO.svg)
 
 
 # 关键信息
