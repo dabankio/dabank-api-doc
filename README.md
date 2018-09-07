@@ -430,7 +430,7 @@ response:
 }
 ```
 
-# 转换BCH地址
+## 转换BCH地址
 
 [htts://api.dabank.io/api/v3/bchAddrConvert](htts://api.dabank.io/api/v3/bchAddrConvert)
 
@@ -445,7 +445,7 @@ request POST:
   "key":"bigzhu",
   "request_time":"1524290015",
   "sign":"xxxx",
-  "address":"0x12345678910388342390012321"
+  "address":"1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu"
 }
 ```
 
