@@ -205,8 +205,8 @@ transer 对象结构:
 ```json
 {  
    "total":"202",
-   "transfers":{
-    [
+   "transfers":[
+    {
      "transfer_id":"123",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -215,8 +215,8 @@ transer 对象结构:
      "confirmed_at":"1524539191",
      "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
      "fee":"0.001"
-    ],
-     [
+    },
+     {
      "transfer_id":"124",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -225,9 +225,8 @@ transer 对象结构:
      "confirmed_at":"1524539191",
      "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
      "fee":"0.001"
-    ],
-     .....
-  }
+    },
+  ]
 }
 ```
 
@@ -288,8 +287,8 @@ transer 对象结构:
 ```json
 {  
    "total":"32",
-   "transfers":{
-    [
+   "transfers":[
+    {
      "transfer_id":"123",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -298,8 +297,8 @@ transer 对象结构:
      "transfer_at":"1524539191",
      "fee":"0.001",
      "confirms":"1"
-    ],
-     [
+    },
+    {
      "transfer_id":"124",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -308,9 +307,8 @@ transer 对象结构:
      "transfer_at":"1524539191",
      "fee":"0.001",
      "confirms":"1"
-    ],
-     .....
-  }
+   }
+  ]
 }
 ```
 ## 账单总和
@@ -380,19 +378,18 @@ data 里为 Array
 | balance | String | 余额. 精度为小数点后8位 |
 
 ```json
-{  
-  [
+[
+  {
   "symbol":"ETH",
   "address":"0x12345678910388342390012321",
   "balance":"234.5"
-  ],
-  [
+  },
+  {
   "symbol":"BTC",
   "address":"0x123456789103883423900123242",
   "balance":"2.5"
-  ],
-  ....
-}
+  },
+]
 ```
 
 ## 验证钱包地址正确性
@@ -575,55 +572,73 @@ response:
 
 # 支持的币种以及小数位数
 
-|        |          |
-| ------ | -------- |
-| symbol | decimals |
-| USO    | 8        |
-| KEY    | 8        |
-| CRE    | 8        |
-| RUFF   | 8        |
-| CDY    | 8        |
-| THM    | 8        |
-| RED    | 8        |
-| BCH    | 8        |
-| LMC    | 6        |
-| BNB    | 8        |
-| DCON   | 0        |
-| BTK    | 8        |
-| USDT   | 6        |
-| MGD    | 8        |
-| ZRX    | 8        |
-| LTC    | 8        |
-| XMC    | 0        |
-| XMR    | 8        |
-| IOST   | 8        |
-| CFUN   | 8        |
-| EOS    | 8        |
-| ALI    | 8        |
-| BTM    | 8        |
-| BTC    | 8        |
-| QTUM   | 8        |
-| ETH    | 8        |
+以下数据截止2018年09月07日，共61个：
+
+<table border="1" style="border-collapse:collapse">
+<tr><th>symbol</th><th>cn_name</th><th>decimals</th><th>token_of</th></tr>
+<tr><td>BCD</td><td>Bitcoin Diamond</td><td>7</td><td>主网</td></tr>
+<tr><td>BCH</td><td>比特币现金</td><td>8</td><td>主网</td></tr>
+<tr><td>BTC</td><td>比特币</td><td>8</td><td>主网</td></tr>
+<tr><td>DCON</td><td>DCON</td><td>0</td><td>主网</td></tr>
+<tr><td>EOS(mainnet)</td><td>EOS(mainnet)</td><td>4</td><td>主网</td></tr>
+<tr><td>ETH</td><td>以太坊</td><td>18</td><td>主网</td></tr>
+<tr><td>LMC</td><td>邻萌宝</td><td>6</td><td>主网</td></tr>
+<tr><td>LTC</td><td>莱特币</td><td>8</td><td>主网</td></tr>
+<tr><td>MGD</td><td>MGD</td><td>8</td><td>主网</td></tr>
+<tr><td>QTUM</td><td>量子</td><td>8</td><td>主网</td></tr>
+<tr><td>TRXmain</td><td>波场主网</td><td>6</td><td>主网</td></tr>
+<tr><td>WCG</td><td>WCG</td><td>8</td><td>主网</td></tr>
+<tr><td>XMC</td><td>XMC</td><td>0</td><td>主网</td></tr>
+<tr><td>XMR</td><td>XMR</td><td>12</td><td>主网</td></tr>
+<tr><td>DRT(WCG)</td><td>DRT(WCG)</td><td>4</td><td>WCG</td></tr>
+<tr><td>AIMS</td><td>HighCastle Token</td><td>8</td><td>ETH</td></tr>
+<tr><td>ALI</td><td>AiLink Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>ANTC</td><td>AntCoin</td><td>18</td><td>ETH</td></tr>
+<tr><td>BFDT</td><td>BFDToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>BNB</td><td>币安币</td><td>18</td><td>ETH</td></tr>
+<tr><td>BTK</td><td>BitcoinToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>BTM</td><td>Bytom</td><td>8</td><td>ETH</td></tr>
+<tr><td>CDY</td><td>CDY</td><td>8</td><td>ETH</td></tr>
+<tr><td>CFUN(ERC20)</td><td>CFun Token</td><td>9</td><td>ETH</td></tr>
+<tr><td>CRE</td><td>CybereitsToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>DKYC</td><td>Data Know Your Customer</td><td>18</td><td>ETH</td></tr>
+<tr><td>EGT</td><td>Egretia</td><td>18</td><td>ETH</td></tr>
+<tr><td>EGTY</td><td>EgtyChain</td><td>8</td><td>ETH</td></tr>
+<tr><td>HOTC</td><td>HOTchain</td><td>18</td><td>ETH</td></tr>
+<tr><td>HOTC(HOTCOIN)</td><td>HotCoin</td><td>0</td><td>ETH</td></tr>
+<tr><td>HPB</td><td>HPBCoin </td><td>18</td><td>ETH</td></tr>
+<tr><td>HYB</td><td>Hybrid</td><td>8</td><td>ETH</td></tr>
+<tr><td>ICX</td><td>ICON</td><td>18</td><td>ETH</td></tr>
+<tr><td>IDM</td><td>IDMONEY</td><td>18</td><td>ETH</td></tr>
+<tr><td>IOST</td><td>IOSToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>JLL</td><td>JLL</td><td>18</td><td>ETH</td></tr>
+<tr><td>KEY</td><td>SelfKey</td><td>18</td><td>ETH</td></tr>
+<tr><td>LBA</td><td>LightBitAtom</td><td>8</td><td>ETH</td></tr>
+<tr><td>LPK</td><td>Kripton</td><td>8</td><td>ETH</td></tr>
+<tr><td>LRC</td><td>Loopring</td><td>18</td><td>ETH</td></tr>
+<tr><td>LYS</td><td>LIGHTYEARS</td><td>8</td><td>ETH</td></tr>
+<tr><td>MBC</td><td>MicroBusinessCoin</td><td>18</td><td>ETH</td></tr>
+<tr><td>MOS</td><td>Moses</td><td>18</td><td>ETH</td></tr>
+<tr><td>MUXE</td><td>MUXE Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>NRM</td><td>Neuromachine</td><td>18</td><td>ETH</td></tr>
+<tr><td>POVR</td><td>POVCoin Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>READ</td><td>阅读币</td><td>8</td><td>ETH</td></tr>
+<tr><td>RED</td><td>REDToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>RUFF</td><td>RUFF</td><td>18</td><td>ETH</td></tr>
+<tr><td>THM</td><td>THM</td><td>18</td><td>ETH</td></tr>
+<tr><td>TRUE</td><td>TRUE Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>USDT</td><td>Tether USD</td><td>6</td><td>ETH</td></tr>
+<tr><td>USO</td><td>Ubiquity</td><td>8</td><td>ETH</td></tr>
+<tr><td>VAR</td><td>Variant</td><td>18</td><td>ETH</td></tr>
+<tr><td>VNS</td><td>VenusToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>XNS</td><td>SUNX</td><td>18</td><td>ETH</td></tr>
+<tr><td>XRT</td><td>XRT Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>XT</td><td>XstarToken</td><td>18</td><td>ETH</td></tr>
+<tr><td>ZRX</td><td>0x Protocol Token</td><td>18</td><td>ETH</td></tr>
+<tr><td>ADD(EOS)</td><td>ADD(EOS)</td><td>4</td><td>EOS(mainnet)</td></tr>
+<tr><td>USDT(Omni)</td><td>USDT（比特币）</td><td>8</td><td>BTC</td></tr></table>
 
 # 版本
 
-| 序号   | 日期         | 修订内容                                     | 修订人    |
-| ---- | ---------- | ---------------------------------------- | ------ |
-| 17   | 2018-04-24 | 验证钱包地址正确性                                | 王东     |
-| 16   | 2018-04-21 | 补充描述内容, 增加部分接口 json 例子                   | 朱一凡    |
-| 15   | 2018-04-18 | 添加支持的币种及小数位数                             | 朱一凡    |
-| 14   | 2018-02-29 | 回调地址增加手续费扣费币种                            | 朱一凡    |
-| 13   | 2018-02-29 | 将所有接口的int或者float类型全转为string              | 王东     |
-| 12   | 2018-02-28 | transfer 接口增加  unique_id, 以避免重复处理        | 朱一凡    |
-| 11   | 2018-02-28 | 返回request_id, 回调增加确认数                    | 朱一凡    |
-| 10   | 2018-02-26 | 申请地址时需要传入用户id                            | 朱一凡    |
-| 9    | 2018-02-24 | 简化字段名                                    | 朱一凡    |
-| 8    | 2018-01-25 | 账单查询入参添加transfer_type，出参删除transfer_type，查询成功账单回参数添加tx_id | 王东     |
-| 7    | 2018-01-24 | 账单查询返回确认数                                | 朱一凡    |
-| 6    | 2018-01-24 | 分开成功账单与在途账单                              | 朱一凡    |
-| 5    | 2018-01-24 | 复用账单查询接口查询 PENDING 状态的账单                 | 王东 朱一凡 |
-| 4    | 2018-01-24 | xstar 新需求: 要在未确认时就回调一次 回调增加类型 TRANSFER_PENDING | 朱一凡    |
-| 3    | 2018-01-24 | 转账需要指定转出地址, 转账账单查询分开传递转入转出地址             | 王东 朱一凡 |
-| 2    | 2018-01-24 | 转账账单查询返回手续费                              | 朱一凡    |
-| 1    | 2018-01-24 | sdk 3.0 文档初始版                            | 朱一凡    |
+请参阅[提交历史](https://github.com/dabankio/dabank-api-doc/commits/master)。
 
