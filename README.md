@@ -574,7 +574,7 @@ response:
 
 以下数据截止2018年09月07日，共61个：
 
-<table border="1" style="border-collapse:collapse">
+<table border="0" style="border-collapse:collapse; text-align: center;">
 <tr><th>symbol</th><th>cn_name</th><th>decimals</th><th>token_of</th></tr>
 <tr><td>BCD</td><td>Bitcoin Diamond</td><td>7</td><td>主网</td></tr>
 <tr><td>BCH</td><td>比特币现金</td><td>8</td><td>主网</td></tr>
