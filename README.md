@@ -205,8 +205,8 @@ transer 对象结构:
 ```json
 {  
    "total":"202",
-   "transfers":{
-    [
+   "transfers":[
+    {
      "transfer_id":"123",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -215,8 +215,8 @@ transer 对象结构:
      "confirmed_at":"1524539191",
      "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
      "fee":"0.001"
-    ],
-     [
+    },
+     {
      "transfer_id":"124",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -225,9 +225,8 @@ transer 对象结构:
      "confirmed_at":"1524539191",
      "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
      "fee":"0.001"
-    ],
-     .....
-  }
+    },
+  ]
 }
 ```
 
@@ -288,8 +287,8 @@ transer 对象结构:
 ```json
 {  
    "total":"32",
-   "transfers":{
-    [
+   "transfers":[
+    {
      "transfer_id":"123",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -298,8 +297,8 @@ transer 对象结构:
      "transfer_at":"1524539191",
      "fee":"0.001",
      "confirms":"1"
-    ],
-     [
+    },
+    {
      "transfer_id":"124",
      "symbol":"ETH",
      "to":"0x12345678910388342390012323",
@@ -308,9 +307,8 @@ transer 对象结构:
      "transfer_at":"1524539191",
      "fee":"0.001",
      "confirms":"1"
-    ],
-     .....
-  }
+   }
+  ]
 }
 ```
 ## 账单总和
@@ -380,19 +378,18 @@ data 里为 Array
 | balance | String | 余额. 精度为小数点后8位 |
 
 ```json
-{  
-  [
+[
+  {
   "symbol":"ETH",
   "address":"0x12345678910388342390012321",
   "balance":"234.5"
-  ],
-  [
+  },
+  {
   "symbol":"BTC",
   "address":"0x123456789103883423900123242",
   "balance":"2.5"
-  ],
-  ....
-}
+  },
+]
 ```
 
 ## 验证钱包地址正确性
