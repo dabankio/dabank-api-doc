@@ -435,7 +435,7 @@ request POST:
 
 | 名称    | 类型   | 必传 | 说明     |
 | ------- | ------ | ---- | -------- |
-| address | String | ✓    | 钱包地址 |
+| address | String | ✓    | BCH新版或旧版地址 |
 
 ```json
 {  
@@ -450,8 +450,8 @@ response:
 
 | 名称    | 类型   | 说明                                 |
 | ------- | ------ | ------------------------------------ |
-| legacy_addr  | String | 旧BCH钱包地址 |
-| cash_addr | String | 新BCH钱包地址     |
+| legacy_addr  | String | 旧版BCH钱包地址（类似于比特币） |
+| cash_addr | String | 新版BCH钱包地址（以`bitcoincash:`开头，请注意，`bitcoincash:`是地址的一部分）   |
 
 ```json
 {  
@@ -558,7 +558,7 @@ request POST:
 
 response:
 
-接口需要按照正确格式返回成功, 否则会一直重试
+接口需要按照正确格式返回成功，否则会一直重试，重试间隔时间为2的重试次数次幂，单位为秒。
 
 | 名字     | 类型     | 说明                       |
 | ------ | ------ | ------------------------ |
