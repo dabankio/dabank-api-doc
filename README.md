@@ -572,7 +572,7 @@ response:
 
 # 支持的币种以及小数位数
 
-以下数据截止2018年09月07日，共61个：
+以下数据截止2018年09月07日，共61个（币种小数位超过8位的支持到8位，低于等于8位的支持实际的小数位数）：
 
 <table border="0" style="border-collapse:collapse; text-align: center;">
 <tr><th>symbol</th><th>cn_name</th><th>decimals</th><th>token_of</th></tr>
