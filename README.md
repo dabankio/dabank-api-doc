@@ -430,7 +430,40 @@ response:
 }
 ```
 
-# 
+# 转换BCH地址
+
+[htts://api.dabank.io/api/v3/bchAddrConvert](htts://api.dabank.io/api/v3/bchAddrConvert)
+
+request POST:
+
+| 名称    | 类型   | 必传 | 说明     |
+| ------- | ------ | ---- | -------- |
+| address | String | ✓    | 钱包地址 |
+
+```json
+{  
+  "key":"bigzhu",
+  "request_time":"1524290015",
+  "sign":"xxxx",
+  "address":"0x12345678910388342390012321"
+}
+```
+
+response:
+
+| 名称    | 类型   | 说明                                 |
+| ------- | ------ | ------------------------------------ |
+| legacy_addr  | String | 旧BCH钱包地址 |
+| cash_addr | String | 新BCH钱包地址     |
+
+```json
+{  
+  "legacy_addr":"1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu",
+  "cash_addr":"bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a"
+}
+```
+
+#  
 
 # 回调
 
