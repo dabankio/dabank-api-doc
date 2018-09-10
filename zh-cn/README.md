@@ -1,7 +1,5 @@
-![logo](./LOGO.svg)
+![logo](../LOGO.svg)
 
-
-这个改成英文的
 
 # 关键信息
 
