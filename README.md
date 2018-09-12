@@ -48,7 +48,7 @@ Steps to generate `sign`:
 1. join `values` with underline `_` to obtain string `content`;
 1. calculate md5 of `content` and you get `sign` of your current request.
 
-documentations on above-mentioned authentication input are omitted
+Documentations on above-mentioned authentication input are omitted
 from now on for brevity. 
 
 ## Response
@@ -74,7 +74,7 @@ Example:
 
 ##  Param Style
 
-keys of JSON in request and response are in lower snake case, like `snake_case`.
+Keys of JSON in request and response are in lower snake case, like `snake_case`.
 
 ## Status of Transactions
 
@@ -94,7 +94,7 @@ Status of transactions, including deposit and withdrawal, could be:
 
 # APIs
 
-API is hosted at `https://api.dabank.io/`.
+APIs are hosted at `https://api.dabank.io/`.
 
 ## Deposit Address Application
 
@@ -119,7 +119,7 @@ API is hosted at `https://api.dabank.io/`.
 }
 ```
 
-response:
+* response:
 
 | key           | type     | comment            |
 | ------- | ------ | ---- |
@@ -165,7 +165,7 @@ response:
 }
 ```
 
-response:
+* response:
 
 | key           | type     | comment            |
 | ----------- | ------ | ---------------------------------------- |
@@ -301,7 +301,7 @@ provides to Legacy format, in favor for users in need.
 }
 ```
 
-response:
+* response:
 
 | key           | type     | comment            |
 | ------- | ------ | ------------------------------------ |
@@ -333,7 +333,7 @@ which is triggered in these cases:
 Dabank uses your secret key to generate data signature in the way mentioned in APIs chapter.
 Check `sign` to avoid phishing.
 
-## HTTP POST Request from Dabank:
+## HTTP POST Request from Dabank
 
 | key           | type     | comment            |
 | ------------- | ------ | ---------------------------------------- |
@@ -420,7 +420,7 @@ Check `sign` to avoid phishing.
 }
 ```
 
-## Your HTTP Response to Dabank:
+## Your HTTP Response to Dabank
 
 You need to response to HTTP request from Dabank with following content:
 
