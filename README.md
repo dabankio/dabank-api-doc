@@ -7,7 +7,7 @@ Dabank is a commercial cloud-based white-labeled cryptocurrency wallet service,
 supporting a wide range of coins.
 
 With Dabank API, you are able to provide your customers with deposit,
-vault and withdrawal with grace.
+vault and withdrawal with grace and speed.
 
 # Summary
 
@@ -74,7 +74,7 @@ Example:
 
 ##  Param Style
 
-key of JSON in request and response are in lower snake case, like `snake_case`.
+keys of JSON in request and response are in lower snake case, like `snake_case`.
 
 ## Status of Transactions
 
@@ -94,7 +94,7 @@ Status of transactions, including deposit and withdrawal, could be:
 
 # APIs
 
-API is hosted at `HTTPs://api.dabank.io/`.
+API is hosted at `https://api.dabank.io/`.
 
 ## Deposit Address Application
 
@@ -272,9 +272,9 @@ the correction of an address as withdrawal destination is guaranteed by your use
 }
 ```
 
-## 转换BCH地址
+## BCH CashAddr/Legacy Address Convention
 
-Dabank uses BCH CashAddr across service,
+For Bitcoin Cash(BCH), Dabank uses CashAddr across service,
 your users may use Legacy Address as withdrawal destination,
 in which case we shall convert them to CashAddr automatically.
 
@@ -303,7 +303,7 @@ provides to Legacy format, in favor for users in need.
 
 response:
 
-| 名称    | 类型   | 说明                                 |
+| key           | type     | comment            |
 | ------- | ------ | ------------------------------------ |
 | legacy_addr  | string | your input in Legacy Address format |
 | cash_addr | string | your input in CashAddr format(starting with `bitcoincash:` which is a inseparable part of address, do not drop that) |
