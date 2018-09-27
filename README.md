@@ -493,7 +493,6 @@ Note: max decimals APIs and callbacks supported is 8.
 <tr><td>BFDT</td><td>BFDToken</td><td>18</td><td>ETH</td></tr>
 <tr><td>BNB</td><td>Binance Token</td><td>18</td><td>ETH</td></tr>
 <tr><td>BTK</td><td>Bitcoin Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>BTM</td><td>Bytom</td><td>8</td><td>ETH</td></tr>
 <tr><td>CDY</td><td>CDY</td><td>8</td><td>ETH</td></tr>
 <tr><td>CRE</td><td>CybereitsToken</td><td>18</td><td>ETH</td></tr>
 <tr><td>DKYC</td><td>Data Know Your Customer</td><td>18</td><td>ETH</td></tr>

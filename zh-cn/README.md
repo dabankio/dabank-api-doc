@@ -597,7 +597,6 @@ response:
 <tr><td>BFDT</td><td>BFDToken</td><td>18</td><td>ETH</td></tr>
 <tr><td>BNB</td><td>币安币</td><td>18</td><td>ETH</td></tr>
 <tr><td>BTK</td><td>BitcoinToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>BTM</td><td>Bytom</td><td>8</td><td>ETH</td></tr>
 <tr><td>CDY</td><td>CDY</td><td>8</td><td>ETH</td></tr>
 <tr><td>CFUN(ERC20)</td><td>CFun Token</td><td>9</td><td>ETH</td></tr>
 <tr><td>CRE</td><td>CybereitsToken</td><td>18</td><td>ETH</td></tr>
