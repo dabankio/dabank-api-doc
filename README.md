@@ -60,6 +60,8 @@ openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 
 * Steps to generate `sign`(for API requests)
 
+`sign` is generated in following steps:
+
 1. extract all keys and values in JSON's key-value pair(except `sign`) in the form of `key=value`, as array `param`;
 1. sort `param` in lexical order;
 1. join `param` with `&` to obtain string `content`;

@@ -55,6 +55,8 @@ openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 
 * 签名生成步骤
 
+签名按如下方式生成：
+
 1. 将JSON中的所有key-value对（`sign`除外）记为`key=value`形式的字符串，放入数组`param`；
 1. 对`param`进行字典排序；
 1. 使用`&`连接`param`内的所有值, 得到字符串`content`；
