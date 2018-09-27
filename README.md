@@ -42,14 +42,14 @@ For every API following, these inputs are needed in request for authentication:
 | sign         | string | SHA256-RSA data signature    |
 | request_time | string | current unix second |
 
-* keys
+**keys**
 
 There are two sets of key-pair involved in SHA256-RSA Authentication:
 
 1. You use `app_private_key`(kept as secret) to sign your API requests, and you upload `app_public_key` to Dabank for request verification;
 1. You download `dabank_public_key` for callback verification, as Dabank uses `dabank_private_key` to sign callbacks.
 
-* Generation of `app_private_key` and `app_public_key`
+**Generation of `app_private_key` and `app_public_key`**
 
 You may use OpenSSL to generate RSA key pairs, note the key length is 2048.
 
@@ -58,7 +58,7 @@ openssl genrsa -out app_private_key.pem 2048
 openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 ```
 
-#### Steps to generate `sign`(for API requests)
+**Steps to generate `sign`(for API requests)**
 
 `sign` is generated in following steps:
 
@@ -69,7 +69,7 @@ openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 1. calculate the signature of `hashed` with `app_private_key` using [RSASSA-PKCS1-V1_5-SIGN](https://tools.ietf.org/html/rfc3447#page-33) from RSA PKCS#1 v1.5 to get `rsa_sign`;
 1. encode `rsa_sign` with base64 and you get `sign` of your current request.
 
-#### Steps to verify `sign`(for Dabank callback verification)
+**Steps to verify `sign`(for Dabank callback verification)**
 
 1. extract all keys and values in JSON's key-value pair(except `sign`) in the form of `key=value`, as array `param`;
 1. sort `param` in lexical order;

@@ -37,14 +37,14 @@ Dabank也提供冷钱包业务。
 | sign         | string | SHA256-RSA风格的签名         |
 | request_time | string | 当前的UNIX秒 |
 
-* 应用和Dabank的密钥
+**应用和Dabank的密钥**
 
 本方案中，有两对密钥参与签名和验证：
 
 1. 应用使用`app_private_key`（应用视为机密）签署API请求，Dabank使用应用上传的`app_public_key`进行验证；
 1. 应用从Dabank处下载`dabank_public_key`来验证来自于Dabank的回调，Dabank使用`dabank_private_key`对这些回调进行签署。
 
-* `app_private_key`和`app_public_key`的生成
+**`app_private_key`和`app_public_key`的生成**
 
 应用可以使用OpenSSL来生成RSA密钥对，私钥的长度要求为2048：
 
@@ -53,7 +53,7 @@ openssl genrsa -out app_private_key.pem 2048
 openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 ```
 
-* 签名生成步骤
+**签名生成步骤**
 
 签名按如下方式生成：
 
@@ -64,6 +64,14 @@ openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 1. 使用[RSASSA-PKCS1-V1_5-SIGN](https://tools.ietf.org/html/rfc3447#page-33)以及`app_private_key`对`hashed`签名，得到`rsa_sign`；
 1. 使用base64对`rsa_sign`进行编码，得到`sign`；
 1. 将`sign`放入 JSON，完成。
+
+**签名验证步骤**
+
+1. 将JSON中的所有key-value对（`sign`除外）记为`key=value`形式的字符串，放入数组`param`；
+1. 对`param`进行字典排序；
+1. 使用`&`连接`param`内的所有值, 得到字符串`content`；
+1. 对`content`进行SHA256，得到哈希`hashed`；
+1. 使用[RSASSA-PKCS1-V1_5-VERIFY](https://tools.ietf.org/html/rfc3447#page-34)以及`dabank_public_key`验证`hashed`的签名是否正确。
 
 ### HMAC风格的签名方案（已废弃）
 
