@@ -9,7 +9,7 @@ supporting a wide range of coins.
 With Dabank API, you are able to provide your customers with deposit,
 vault and withdrawal with grace and speed.
 
-# Summary
+# General
 
 ## Communication
 
@@ -247,6 +247,7 @@ This API needs only basic auth param.
 
 | key      | type     |  compulsory  | comment   |
 | ------ | ------ | ---- | ---------------- |
+|  |  |  |  |
 
 ```json
 {  
