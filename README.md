@@ -92,6 +92,8 @@ For every API following, these inputs are needed in request for authentication:
 
 * Steps to generate `sign`(for API requests and Dabank callback verification)
 
+`sign` is generated in following steps:
+
 1. extract all values except `sign` in JSON's key-value pair to array `values`;
 1. put your `secret`(obtained from control panel of Dabank) into `values`;
 1. sort `values` in lexical order;

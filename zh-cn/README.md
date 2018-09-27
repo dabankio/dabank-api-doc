@@ -81,6 +81,8 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 
 * 签名生成步骤
 
+签名按如下方式生成：
+
 1. 取出JSON中所有 key-value 对（`sign`除外）中的value，放入数组`values`；
 1. 将从Dabank取得的`secret`放入数组`values`；
 1. 对`values`进行字典序排序；
