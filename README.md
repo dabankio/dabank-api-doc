@@ -32,6 +32,54 @@ All APIs uses HTTP POST method, with `Content-Type`header `application/json; cha
 
 ## Authentication
 
+### SHA256-RSA Authentication
+
+For every API following, these inputs are needed in request for authentication:
+
+| key           | type     | comment            |
+| ------------ | ------ | ------------- |
+| key          | string | key provides identity       |
+| sign         | string | SHA256-RSA data signature    |
+| request_time | string | current unix second |
+
+* keys
+
+There are two sets of key-pair involved in SHA256-RSA Authentication:
+
+1. You use `app_private_key`(kept as secret) to sign your API requests, and you upload `app_public_key` to Dabank for request verification;
+1. You download `dabank_public_key` for callback verification, as Dabank uses `dabank_private_key` to sign callbacks.
+
+* Generation of `app_private_key` and `app_public_key`
+
+You may use OpenSSL to generate RSA key pairs, note the key length is 2048.
+
+```bash
+openssl genrsa -out app_private_key.pem 2048
+openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
+```
+
+* Steps to generate `sign`(for API requests)
+
+1. extract all keys and values in JSON's key-value pair(except `sign`) in the form of `key=value`, as array `param`;
+1. sort `param` in lexical order;
+1. join `param` with `&` to obtain string `content`;
+1. calculate `sha256` of `content` to get `hashed`;
+1. calculate the signature of `hashed` with `app_private_key` using [RSASSA-PKCS1-V1_5-SIGN](https://tools.ietf.org/html/rfc3447#page-33) from RSA PKCS#1 v1.5 to get `rsa_sign`;
+1. encode `rsa_sign` with base64 and you get `sign` of your current request.
+
+* Steps to verify `sign`(for Dabank callback verification)
+
+1. extract all keys and values in JSON's key-value pair(except `sign`) in the form of `key=value`, as array `param`;
+1. sort `param` in lexical order;
+1. join `param` with `&` to obtain string `content`;
+1. calculate `sha256` of `content` to get `hashed`;
+1. verify the signature of `hashed` with `dabank_public_key` using [RSASSA-PKCS1-V1_5-VERIFY](https://tools.ietf.org/html/rfc3447#page-34) from RSA PKCS#1 v1.5
+
+
+### HMAC-style Authentication(Deprecated)
+
+HMAC-style Authentication is deprecated, which will be dropped in future.
+
 For every API following, these inputs are needed in request for authentication:
 
 | key           | type     | comment            |
@@ -40,10 +88,10 @@ For every API following, these inputs are needed in request for authentication:
 | sign         | string | HMAC-style data signature    |
 | request_time | string | current unix second |
 
-Steps to generate `sign`:
+* Steps to generate `sign`(for API requests and Dabank callback verification)
 
 1. extract all values except `sign` in JSON's key-value pair to array `values`;
-1. put your secret(got from control panel of Dabank) into `values`;
+1. put your `secret`(obtained from control panel of Dabank) into `values`;
 1. sort `values` in lexical order;
 1. join `values` with underline `_` to obtain string `content`;
 1. calculate md5 of `content` and you get `sign` of your current request.
@@ -331,7 +379,7 @@ which is triggered in these cases:
 ## Security Note
 
 Dabank uses your secret key to generate data signature in the way mentioned in APIs chapter.
-Check `sign` to avoid phishing.
+Check `sign` to avoid phishing, see chapter "Authentication".
 
 ## HTTP POST Request from Dabank
 
@@ -534,5 +582,5 @@ Note: max decimals APIs and callbacks supported is 8.
 
 # Version
 
-Dabank v3.3 2018-09-12
+Dabank v3.4-Beta 2018-09-27
 
