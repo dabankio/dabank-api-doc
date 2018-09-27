@@ -58,7 +58,7 @@ openssl genrsa -out app_private_key.pem 2048
 openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 ```
 
-* Steps to generate `sign`(for API requests)
+#### Steps to generate `sign`(for API requests)
 
 `sign` is generated in following steps:
 
@@ -69,7 +69,7 @@ openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
 1. calculate the signature of `hashed` with `app_private_key` using [RSASSA-PKCS1-V1_5-SIGN](https://tools.ietf.org/html/rfc3447#page-33) from RSA PKCS#1 v1.5 to get `rsa_sign`;
 1. encode `rsa_sign` with base64 and you get `sign` of your current request.
 
-* Steps to verify `sign`(for Dabank callback verification)
+#### Steps to verify `sign`(for Dabank callback verification)
 
 1. extract all keys and values in JSON's key-value pair(except `sign`) in the form of `key=value`, as array `param`;
 1. sort `param` in lexical order;
