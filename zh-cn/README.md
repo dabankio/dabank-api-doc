@@ -112,7 +112,7 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 举例：
 
 ```json
-{ 
+{
     "err_code": "ERR_ACCT_NOT_EXIST",
     "err_info": "account not exist, check your key",
     "data":null
@@ -147,7 +147,7 @@ Dabank API位于`https://api.dabank.io/`.
 
 
 ```json
-{  
+{
    "key":"your_api_id",
    "request_time":"1524290015",
    "sign":"data_signature",
@@ -166,7 +166,7 @@ Dabank API位于`https://api.dabank.io/`.
 {
    "err_code":"",
    "err_info":"",
-   "data":{  
+   "data":{
       "address":"0x12345678910388342390012323"
    },
    "request_id":233049
@@ -190,7 +190,7 @@ Dabank API位于`https://api.dabank.io/`.
 | unique_id | string | ✓    | 调用方生成对本操作的唯一ID，如果应用打算重试同一笔交易，需要提供相同的`unique_id` |
 
 ```json
-{  
+{
    "unique_id":"must_be_unique_use_the_same_one_when_retrying",
    "to":"0x12345678910388342390012323",
    "sign":"data_signature",
@@ -212,10 +212,10 @@ Dabank API位于`https://api.dabank.io/`.
 
 
 ```json
-{  
+{
    "err_code":"",
    "err_info":"",
-   "data":{  
+   "data":{
       "status":"TRANSFER_PENDING",
       "transfer_id":123
    },
@@ -236,7 +236,7 @@ Dabank API位于`https://api.dabank.io/`.
 |  |  |  |  |
 
 ```json
-{  
+{
   "key":"bigzhu",
   "request_time":"1524290015",
   "sign":"xxxx",
@@ -286,7 +286,7 @@ data 里为 Array
 | address | string | ✓    | 待验证地址 |
 
 ```json
-{  
+{
   "key":"your_api_id",
   "request_time":"1524290015",
   "sign":"data_signature",
@@ -303,7 +303,7 @@ data 里为 Array
 | err_msg | string | `Failure`时，这里会提供更多信息    |
 
 ```json
-{  
+{
   "verify":"Failure",
   "err_msg":"ETH address should be started with \"0x\""
 }
@@ -329,7 +329,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | address | string | ✓    | BCH新版或旧版地址 |
 
 ```json
-{  
+{
   "key":"your_api_id",
   "request_time":"1524290015",
   "sign":"data_signature",
@@ -345,7 +345,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | cash_addr | string | 新版BCH钱包地址（以`bitcoincash:`开头，请注意，`bitcoincash:`是地址的一部分）   |
 
 ```json
-{  
+{
   "legacy_addr":"1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu",
   "cash_addr":"bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a"
 }
@@ -357,6 +357,10 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 
 * 转出，网络确认数变化
 * 转出，网络确认转账成功
+* 转出，人工处理驳回
+
+  > 经人工确认，交易已经无法挽回地失败，因此已经被作废。此时，系统已把转账资产退还到源账户，但已产生的手续费不退还。交易所收到该回调后，应该解锁或退还该笔交易涉及到的资产，并从手续费资产(资产类型由fee_symbol字段指定)账户中扣除已经产生的手续费。
+
 * 转入，网络确认数变化
 * 转入，网络确认转账成功
 
@@ -374,7 +378,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | tx_id         | string | txid                                     |
 | transfer_at   | string | 交易发起时间                                   |
 | confirm_at    | string | 交易确认时间                                   |
-| status        | string | TRANSFER_SUCCESSFUL(成功) TRANSFER_PENDING(在途) |
+| status        | string | TRANSFER_SUCCESSFUL(成功) TRANSFER_PENDING(在途) TRANSFER_INVALID(人工处理驳回) |
 | transfer_type | string | 转账类型 IN(转入) OUT(转出)                      |
 | to            | string | 转入地址                                     |
 | from          | string | 转出地址, 类型为转入(IN)时可能为空                     |
@@ -385,7 +389,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 * 转出，网络确认数变化的例子：
 
 ```json
-{  
+{
    "transfer_id":"1365850",
    "symbol":"BTC",
    "tx_id":"7cee2e2055c85d40ab27f713d1bbcd7db2d07a8ab54483e7c423ed6cdc689007",
@@ -408,7 +412,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 * 转出，网络确认转账成功的例子：
 
 ```json
-{  
+{
    "transfer_id":"1365848",
    "symbol":"MGD",
    "tx_id":"bc2929b14ea303e198517d1550e30e1b8125f5f16fb373f7407f8a48cf605c7a",
@@ -428,10 +432,33 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 }
 ```
 
+* 转出，人工处理驳回的例子：
+
+```json
+{
+   "transfer_id":"1365848",
+   "symbol":"MGD",
+   "tx_id":"bc2929b14ea303e198517d1550e30e1b8125f5f16fb373f7407f8a48cf605c7a",
+   "confirms":"0",
+   "transfer_at":"1524293497",
+   "confirm_at":"1524294491",
+   "transfer_type":"OUT",
+   "status":"TRANSFER_INVALID",
+   "to":"MHBLixzhMs4RCfudx2jttU1SesxkjLxUrF",
+   "from":"MPfFsz7GTSi4vQ5XEbMVRAZ67tDd6sQD21",
+   "coins":"999.9",
+   "fee":"0.001",
+   "fee_symbol":"MGD",
+   "request_time":"1524294491",
+   "key":"your_api_id",
+   "sign":"123"
+}
+```
+
 * 转入的例子：
 
 ```json
-{  
+{
    "transfer_id":"1365849",
    "symbol":"ETH",
    "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
@@ -460,7 +487,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | result | string | 成功时为 "Success", 失败时为错误信息 |
 
 ```json
-{  
+{
    "result":"Success"
 }
 ```
