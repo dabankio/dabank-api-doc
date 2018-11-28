@@ -357,9 +357,9 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 
 * 转出，网络确认数变化
 * 转出，网络确认转账成功
-* 转出，人工处理驳回
+* 转出，失败
 
-  > 经人工确认，交易已经无法挽回地失败，因此已经被作废。此时，系统已把转账资产退还到源账户，但已产生的手续费不退还。交易所收到该回调后，应该解锁或退还该笔交易涉及到的资产，并从手续费资产(资产类型由fee_symbol字段指定)账户中扣除已经产生的手续费。
+  > 交易彻底失败。转账资产已退还到源账户，但不退还已产生的手续费（手续费资产类型由fee_symbol字段指定）。
 
 * 转入，网络确认数变化
 * 转入，网络确认转账成功
@@ -378,7 +378,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | tx_id         | string | txid                                     |
 | transfer_at   | string | 交易发起时间                                   |
 | confirm_at    | string | 交易确认时间                                   |
-| status        | string | TRANSFER_SUCCESSFUL(成功) TRANSFER_PENDING(在途) TRANSFER_INVALID(人工处理驳回) |
+| status        | string | TRANSFER_SUCCESSFUL(成功) TRANSFER_PENDING(在途) TRANSFER_INVALID(失败) |
 | transfer_type | string | 转账类型 IN(转入) OUT(转出)                      |
 | to            | string | 转入地址                                     |
 | from          | string | 转出地址, 类型为转入(IN)时可能为空                     |
@@ -432,7 +432,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 }
 ```
 
-* 转出，人工处理驳回的例子：
+* 转出，失败的例子：
 
 ```json
 {
