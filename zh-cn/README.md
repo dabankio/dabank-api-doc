@@ -123,18 +123,24 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 
 ### 错误编码列表
 
-| 错误码                     | 说明                         |
-| -------------------------- | ---------------------------- |
-| [Err]SameWalletAddress     | 钱包地址相同                 |
-| [Err]AddressMismatchedApp  | 地址和APP不匹配              |
-| [Err]FromAndToNotBelonging | from和to地址都不存在于数据库 |
-| [Err]ServiceInternalError  | 未分类的错误                 |
-| [Err]BadRequest            | 请求缺少参数或无法解析       |
-| [Err]Unauthorized          | 请求未通过授权               |
-| [Err]UnsupportedSymbol     | 无效的Symbol                 |
-| [Err]BannedSymbol          | symbol已禁用                 |
-| [Err]MalformedAddress      | 无效地址                     |
-| [Err]InvalidAmount         | 金额不正确                   |
+| 错误码                          | 说明                                             |
+| ------------------------------- | ------------------------------------------------ |
+| [Err]SameWalletAddress          | from和to地址相同                                 |
+| [Err]AddressMismatchedApp       | 地址和APP不匹配                                  |
+| [Err]FromAndToNotBelonging      | from和to地址都不存在                             |
+| [Err]ServiceInternalError       | 未分类的错误                                     |
+| [Err]BadRequest                 | 请求缺少参数或无法解析                           |
+| [Err]Unauthorized               | 请求未通过授权                                   |
+| [Err]UnsupportedSymbol          | 无效的Symbol                                     |
+| [Err]BannedSymbol               | symbol已禁用                                     |
+| [Err]MalformedAddress           | 地址无效                                         |
+| [Err]ErrIncorrectTransferAmount | 转账金额不正确。 例如：金额小于0；精度不正确等。 |
+| [Err]OverDailyWithdrawalLimit   | 达到当日提币上限                                 |
+| [Err]AcctNotFound               | 账户未找到                                       |
+| [Err]InsufficientBalance        | 账户余额不足                                     |
+| [Err]InsufficientFunds          | 账户准备金不足                                   |
+| [Err]SmallWithdraw              | 低于币种单次提币下限                             |
+| [Err]LargeWithdraw              | 超过币种单次提币上限                             |
 
 ##  json 风格
 
