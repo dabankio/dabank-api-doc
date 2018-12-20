@@ -123,24 +123,24 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 
 ### 错误编码列表
 
-| 错误码                          | 说明                                             |
-| ------------------------------- | ------------------------------------------------ |
-| [Err]SameWalletAddress          | from和to地址相同                                 |
-| [Err]AddressMismatchedApp       | 地址和APP不匹配                                  |
-| [Err]FromAndToNotBelonging      | from和to地址都不存在                             |
-| [Err]ServiceInternalError       | 未分类的错误                                     |
-| [Err]BadRequest                 | 请求缺少参数或无法解析                           |
-| [Err]Unauthorized               | 请求未通过授权                                   |
-| [Err]UnsupportedSymbol          | 无效的Symbol                                     |
-| [Err]BannedSymbol               | symbol已禁用                                     |
-| [Err]MalformedAddress           | 地址无效                                         |
-| [Err]ErrIncorrectTransferAmount | 转账金额不正确。 例如：金额小于0；精度不正确等。 |
-| [Err]OverDailyWithdrawalLimit   | 达到当日提币上限                                 |
-| [Err]AcctNotFound               | 账户未找到                                       |
-| [Err]InsufficientBalance        | 账户余额不足                                     |
-| [Err]InsufficientFunds          | 账户准备金不足                                   |
-| [Err]SmallWithdraw              | 低于币种单次提币下限                             |
-| [Err]LargeWithdraw              | 超过币种单次提币上限                             |
+| 错误码                          | 说明                   | 错误原因及处理建议(仅供参考)                     |
+| ------------------------------- | ---------------------- | ------------------------------------------------ |
+| [Err]SameWalletAddress          | from和to地址相同       | 同一笔转账的from地址不能与to地址相同。           |
+| [Err]AddressMismatchedApp       | 地址和APP不匹配        | key不正确；地址不是dabank管理的有效地址等。      |
+| [Err]FromAndToNotBelonging      | from和to地址都不存在   | from和to地址都不是dabank管理的有效地址。         |
+| [Err]ServiceInternalError       | 未分类的错误           | 系统内部错误。                                   |
+| [Err]BadRequest                 | 请求缺少参数或无法解析 | 根据详细错误信息检查请求参数。                   |
+| [Err]Unauthorized               | 请求未通过授权         | 检查鉴权所需参数是否正确设置。                   |
+| [Err]UnsupportedSymbol          | 无效的Symbol           | 检查symbol名称是否正确，并且在支持中。           |
+| [Err]BannedSymbol               | symbol已禁用           | dabank临时取消了对该币种的支持。                 |
+| [Err]MalformedAddress           | 地址无效               | 检查地址是否正确。                               |
+| [Err]ErrIncorrectTransferAmount | 转账金额不正确。       | 确保交易金额大于0；精度要符合对应币种的规格。    |
+| [Err]OverDailyWithdrawalLimit   | 达到当日提币上限       |                                                  |
+| [Err]AcctNotFound               | 账户未找到             | 检查参数中的地址是否与交易涉及的账户的地址匹配。 |
+| [Err]InsufficientBalance        | 账户余额不足           |                                                  |
+| [Err]InsufficientFunds          | 账户准备金不足         | 执行该操作会使账户资金低于账户准备金。           |
+| [Err]SmallWithdraw              | 低于币种单次提币下限   |                                                  |
+| [Err]LargeWithdraw              | 超过币种单次提币上限   |                                                  |
 
 ##  json 风格
 
