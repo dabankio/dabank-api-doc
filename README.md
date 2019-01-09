@@ -524,68 +524,107 @@ like above mentioned.
 Note: max decimals APIs and callbacks supported is 8. 
 
 <table border="0" style="border-collapse:collapse; text-align: center;">
-<tr><th>symbol</th><th>name</th><th>decimals</th><th>is token of</th></tr>
-<tr><td>BCD</td><td>Bitcoin Diamond</td><td>7</td><td>mainnet coin</td></tr>
-<tr><td>BCH</td><td>Bitcoin Cash</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>BTC</td><td>Bitcoin</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>DCON</td><td>DCON</td><td>0</td><td>mainnet coin</td></tr>
-<tr><td>EOS(mainnet)</td><td>EOS(mainnet)</td><td>4</td><td>mainnet coin</td></tr>
-<tr><td>ETH</td><td>Ethereum</td><td>18</td><td>mainnet coin</td></tr>
-<tr><td>LMC</td><td>Lomocoin</td><td>6</td><td>mainnet coin</td></tr>
-<tr><td>LTC</td><td>Litecoin</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>MGD</td><td>MassGrid</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>QTUM</td><td>Qtum</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>TRXmain</td><td>Tron mainnet</td><td>6</td><td>mainnet coin</td></tr>
-<tr><td>WCG</td><td>World Crypto Gold</td><td>8</td><td>mainnet coin</td></tr>
-<tr><td>XMC</td><td>XMC</td><td>0</td><td>mainnet coin</td></tr>
-<tr><td>XMR</td><td>XMR</td><td>12</td><td>mainnet coin</td></tr>
-<tr><td>DRT(WCG)</td><td>DRT(WCG Token)</td><td>4</td><td>WCG</td></tr>
-<tr><td>AIMS</td><td>HighCastle Token</td><td>8</td><td>ETH</td></tr>
-<tr><td>ALI</td><td>AiLink Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>ANTC</td><td>AntCoin</td><td>18</td><td>ETH</td></tr>
-<tr><td>BFDT</td><td>BFDToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>BNB</td><td>Binance Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>BTK</td><td>Bitcoin Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>CDY</td><td>CDY</td><td>8</td><td>ETH</td></tr>
-<tr><td>CRE</td><td>CybereitsToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>DKYC</td><td>Data Know Your Customer</td><td>18</td><td>ETH</td></tr>
-<tr><td>EGT</td><td>Egretia</td><td>18</td><td>ETH</td></tr>
-<tr><td>EGTY</td><td>EgtyChain</td><td>8</td><td>ETH</td></tr>
-<tr><td>HOTC</td><td>HOTchain</td><td>18</td><td>ETH</td></tr>
-<tr><td>HOTC(HOTCOIN)</td><td>HotCoin</td><td>0</td><td>ETH</td></tr>
-<tr><td>HPB</td><td>HPBCoin </td><td>18</td><td>ETH</td></tr>
-<tr><td>HYB</td><td>Hybrid</td><td>8</td><td>ETH</td></tr>
-<tr><td>ICX</td><td>ICON</td><td>18</td><td>ETH</td></tr>
-<tr><td>IDM</td><td>IDMONEY</td><td>18</td><td>ETH</td></tr>
-<tr><td>IOST</td><td>IOSToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>JLL</td><td>JLL</td><td>18</td><td>ETH</td></tr>
-<tr><td>KEY</td><td>SelfKey</td><td>18</td><td>ETH</td></tr>
-<tr><td>LBA</td><td>LightBitAtom</td><td>8</td><td>ETH</td></tr>
-<tr><td>LPK</td><td>Kripton</td><td>8</td><td>ETH</td></tr>
-<tr><td>LRC</td><td>Loopring</td><td>18</td><td>ETH</td></tr>
-<tr><td>LYS</td><td>LIGHTYEARS</td><td>8</td><td>ETH</td></tr>
-<tr><td>MBC</td><td>MicroBusinessCoin</td><td>18</td><td>ETH</td></tr>
-<tr><td>MOS</td><td>Moses</td><td>18</td><td>ETH</td></tr>
-<tr><td>MUXE</td><td>MUXE Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>NRM</td><td>Neuromachine</td><td>18</td><td>ETH</td></tr>
-<tr><td>POVR</td><td>POVCoin Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>READ</td><td>READ Token</td><td>8</td><td>ETH</td></tr>
-<tr><td>RED</td><td>REDToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>RUFF</td><td>RUFF</td><td>18</td><td>ETH</td></tr>
-<tr><td>THM</td><td>THM</td><td>18</td><td>ETH</td></tr>
-<tr><td>TRUE</td><td>TRUE Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>USDT</td><td>Tether USD</td><td>6</td><td>ETH</td></tr>
-<tr><td>USO</td><td>Ubiquity</td><td>8</td><td>ETH</td></tr>
-<tr><td>VAR</td><td>Variant</td><td>18</td><td>ETH</td></tr>
-<tr><td>VNS</td><td>VenusToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>XNS</td><td>SUNX</td><td>18</td><td>ETH</td></tr>
-<tr><td>XRT</td><td>XRT Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>XT</td><td>XstarToken</td><td>18</td><td>ETH</td></tr>
-<tr><td>ZRX</td><td>0x Protocol Token</td><td>18</td><td>ETH</td></tr>
-<tr><td>ADD(EOS)</td><td>ADD(EOS Token)</td><td>4</td><td>EOS(mainnet)</td></tr>
-<tr><td>USDT(Omni)</td><td>USDT(Omni Layer)</td><td>8</td><td>BTC</td></tr></table>
+<tr><th>symbol</th><th>token_of</th><th>decimals</th><th>contract_address</th></tr>
+<tr><td>AAESP(WCG2)</td><td>WCG</td><td>4</td><td>14166359669915381351</td></tr>
+<tr><td>ABB</td><td>ETH</td><td>18</td><td>0xbde6ff7ff944aa8ef554410572dfee184d25302a</td></tr>
+<tr><td>ADD(EOS)</td><td>EOS(mainnet)</td><td>4</td><td>eosadddddddd</td></tr>
+<tr><td>AIMS</td><td>ETH</td><td>8</td><td>0x9a1c7577a69ea9e296ef99bfb0eb6bedbe352a36</td></tr>
+<tr><td>ALI</td><td>ETH</td><td>18</td><td>0x4289c043a12392f1027307fb58272d8ebd853912</td></tr>
+<tr><td>ANTC</td><td>ETH</td><td>18</td><td>0xa8953562660855aaa3b2b2af9398e16246dfa597</td></tr>
+<tr><td>AXPR</td><td>ETH</td><td>18</td><td>0xc39e626a04c5971d770e319760d7926502975e47</td></tr>
+<tr><td>BCD</td><td></td><td>7</td><td></td></tr>
+<tr><td>BCH</td><td></td><td>8</td><td></td></tr>
+<tr><td>BFDT</td><td>ETH</td><td>18</td><td>0xd2d0f85b690604c245f61513bf4679b24ed64c35</td></tr>
+<tr><td>BIDT</td><td>ETH</td><td>18</td><td>0x9206dadafd7555baf1bf004af18911152bf7f55b</td></tr>
+<tr><td>BNB</td><td>ETH</td><td>18</td><td>0xb8c77482e45f1f44de1745f52c74426c631bdd52</td></tr>
+<tr><td>BTC</td><td></td><td>8</td><td></td></tr>
+<tr><td>BTK</td><td>ETH</td><td>18</td><td>0xdb8646f5b487b5dd979fac618350e85018f557d4</td></tr>
+<tr><td>BTM</td><td>ETH</td><td>8</td><td>0xcb97e65f07da24d46bcdd078ebebd7c6e6e3d750</td></tr>
+<tr><td>CDY</td><td>ETH</td><td>8</td><td>0x10f135ce102eee47dca8fe8e19dca6324dfbd684</td></tr>
+<tr><td>CFUN(ERC20)</td><td>ETH</td><td>9</td><td>0xd6ed0e5d7f854b64b5e467a240a6c155c17cc6a2</td></tr>
+<tr><td>CRE</td><td>ETH</td><td>18</td><td>0x61f33da40594cec1e3dc900faf99f861d01e2e7d</td></tr>
+<tr><td>CTM(WCG2)</td><td>WCG2</td><td>4</td><td>7171868846042689336</td></tr>
+<tr><td>CVN</td><td>ETH</td><td>5</td><td>0x62aaf435273bc4baa78dcebd6590042d7e58ba6f</td></tr>
+<tr><td>DAILY</td><td>ETH</td><td>8</td><td>0xbc63f11d42860d7e41a4ce856581f0ce15ac4008</td></tr>
+<tr><td>DATX</td><td>ETH</td><td>18</td><td>0xabbbb6447b68ffd6141da77c18c7b5876ed6c5ab</td></tr>
+<tr><td>DCON</td><td></td><td>0</td><td></td></tr>
+<tr><td>DKYC</td><td>ETH</td><td>18</td><td>0x38d1b0d157529bd5d936719a8a5f8379afb24faa</td></tr>
+<tr><td>DRT(WCG2)</td><td>WCG2</td><td>4</td><td>7776054229687920460</td></tr>
+<tr><td>EGT</td><td>ETH</td><td>18</td><td>0x8e1b448ec7adfc7fa35fc2e885678bd323176e34</td></tr>
+<tr><td>EGTY</td><td>ETH</td><td>8</td><td>0x22c422d57638ff48af2e471e6f9fa5dc5b5edbd5</td></tr>
+<tr><td>EOS(mainnet)</td><td></td><td>4</td><td>eosio.token</td></tr>
+<tr><td>EQT(WCG2)</td><td>WCG2</td><td>4</td><td>17662811370611592334</td></tr>
+<tr><td>ETH</td><td></td><td>18</td><td></td></tr>
+<tr><td>FCS</td><td>ETH</td><td>18</td><td>0x574b5b500517ccad92c78573c7daf8be8cc0de19</td></tr>
+<tr><td>FREC</td><td>ETH</td><td>18</td><td>0x17e67d1cb4e349b9ca4bc3e17c7df2a397a7bb64</td></tr>
+<tr><td>GGP</td><td>ETH</td><td>5</td><td>0xcaa8a02ee6f6ed7cc12449041d4426fb10626b6f</td></tr>
+<tr><td>GUSD</td><td>ETH</td><td>2</td><td>0x056fd409e1d7a124bd7017459dfea2f387b6d5cd</td></tr>
+<tr><td>GVM(WCG2)</td><td>WCG2</td><td>4</td><td>11835391898538536373</td></tr>
+<tr><td>HOTC</td><td>ETH</td><td>18</td><td>0x4d09c5e758ca68be27240f29fb681e5a5341ca98</td></tr>
+<tr><td>HOTC(HOTCOIN)</td><td>ETH</td><td>0</td><td>0x5ebdc890cdb9312f9c8cd3d8ddc28fe9509f9923</td></tr>
+<tr><td>HPB</td><td>ETH</td><td>18</td><td>0x38c6a68304cdefb9bec48bbfaaba5c5b47818bb2</td></tr>
+<tr><td>HYB</td><td>ETH</td><td>8</td><td>0x00d53126139c547c7bd4f4285fc3756c2f081ab1</td></tr>
+<tr><td>ICX</td><td>ETH</td><td>18</td><td>0xb5a5f22694352c15b00323844ad545abb2b11028</td></tr>
+<tr><td>IDM</td><td>ETH</td><td>18</td><td>0x28b85bc9e851271214fe70f433874b9aedc5a94a</td></tr>
+<tr><td>IOST</td><td>ETH</td><td>18</td><td>0xfa1a856cfa3409cfa145fa4e20eb270df3eb21ab</td></tr>
+<tr><td>IPC</td><td></td><td>8</td><td></td></tr>
+<tr><td>ITU</td><td>ETH</td><td>18</td><td>0xe9024599539b135c1eb889c1e70a71241631bc45</td></tr>
+<tr><td>JLL</td><td>ETH</td><td>18</td><td>0x5661c46e366570360064ae1a50a17a7a1a8f3236</td></tr>
+<tr><td>JOBS</td><td>ETH</td><td>8</td><td>0x994ad6d288f1797ad9e09682970ba474fc3e1fbc</td></tr>
+<tr><td>KEY</td><td>ETH</td><td>18</td><td>0x4cc19356f2d37338b9802aa8e8fc58b0373296e7</td></tr>
+<tr><td>LBA</td><td>ETH</td><td>8</td><td>0xae2592b477ac500068a7925ddfc9ee448fb58242</td></tr>
+<tr><td>LMC</td><td></td><td>6</td><td></td></tr>
+<tr><td>LPK</td><td>ETH</td><td>8</td><td>0x2cc71c048a804da930e28e93f3211dc03c702995</td></tr>
+<tr><td>LRC</td><td>ETH</td><td>18</td><td>0xef68e7c694f40c8202821edf525de3782458639f</td></tr>
+<tr><td>LTC</td><td></td><td>8</td><td></td></tr>
+<tr><td>LYS</td><td>ETH</td><td>8</td><td>0xdd41fbd1ae95c5d9b198174a28e04be6b3d1aa27</td></tr>
+<tr><td>MAT(WCG2)</td><td>WCG2</td><td>4</td><td>6316460833260624272</td></tr>
+<tr><td>MBC</td><td>ETH</td><td>18</td><td>0x9c007b020685387fc93583d8a7eb97506df0f26a</td></tr>
+<tr><td>MGD</td><td></td><td>8</td><td></td></tr>
+<tr><td>MNR</td><td>ETH</td><td>18</td><td>0x5f824733d130ad85ec5e180368559cc89d14933d</td></tr>
+<tr><td>MOS</td><td>ETH</td><td>18</td><td>0x420a43153da24b9e2aedcec2b8158a8653a3317e</td></tr>
+<tr><td>MTR(WCG2)</td><td>WCG2</td><td>4</td><td>12642904667336691118</td></tr>
+<tr><td>MUXE</td><td>ETH</td><td>18</td><td>0x515669d308f887fd83a471c7764f5d084886d34d</td></tr>
+<tr><td>NRM</td><td>ETH</td><td>18</td><td>0x00000b233566fcc3825f94d68d4fc410f8cb2300</td></tr>
+<tr><td>NSC</td><td>ETH</td><td>18</td><td>0x827b67176c20edf0f0d3eb76b0c53aa925018f2b</td></tr>
+<tr><td>PAX</td><td>ETH</td><td>18</td><td>0x8e870d67f660d95d5be530380d0ec0bd388289e1</td></tr>
+<tr><td>PBK</td><td>ETH</td><td>7</td><td>0x077dc3c0c9543df1cdd78386df3204e69e0dd274</td></tr>
+<tr><td>PIPS</td><td>ETH</td><td>18</td><td>0x59db9fde270b39a07f38fa3106a760829074c7d9</td></tr>
+<tr><td>POVR</td><td>ETH</td><td>18</td><td>0xc26925d537af8b3f315eeaf27113e84875b6f1b9</td></tr>
+<tr><td>QOS</td><td>ETH</td><td>4</td><td>0x7b188a8b3a2113621895fb35fc67a779caffa92d</td></tr>
+<tr><td>QTUM</td><td></td><td>8</td><td></td></tr>
+<tr><td>READ</td><td>ETH</td><td>8</td><td>0x13d0bf45e5f319fa0b58900807049f23cae7c40d</td></tr>
+<tr><td>RED</td><td>ETH</td><td>18</td><td>0x76960dccd5a1fe799f7c29be9f19ceb4627aeb2f</td></tr>
+<tr><td>REDC</td><td>ETH</td><td>18</td><td>0xb563300a3bac79fc09b93b6f84ce0d4465a2ac27</td></tr>
+<tr><td>RUFF</td><td>ETH</td><td>18</td><td>0xf278c1ca969095ffddded020290cf8b5c424ace2</td></tr>
+<tr><td>SNCOIN</td><td>ETH</td><td>18</td><td>0x8c211128f8d232935afd80543e442f894a4355b7</td></tr>
+<tr><td>TASH</td><td>ETH</td><td>18</td><td>0x002f06abe6995fd0ea4be011c53bfc989fa53ce0</td></tr>
+<tr><td>THM</td><td>ETH</td><td>18</td><td>0xf1dd5964eabcc6e86230fa6f222677cfdaaf9f0e</td></tr>
+<tr><td>TLT(WCG2)</td><td>WCG2</td><td>4</td><td>2721668346522778691</td></tr>
+<tr><td>TRIO</td><td>ETH</td><td>18</td><td>0x8b40761142b9aa6dc8964e61d0585995425c3d94</td></tr>
+<tr><td>TRUE</td><td>ETH</td><td>18</td><td>0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab</td></tr>
+<tr><td>TRX</td><td>ETH</td><td>6</td><td>0xf230b790e05390fc8295f4d3f60332c93bed42e2</td></tr>
+<tr><td>TRXmain</td><td></td><td>6</td><td></td></tr>
+<tr><td>USDT</td><td>ETH</td><td>6</td><td>0xdac17f958d2ee523a2206206994597c13d831ec7</td></tr>
+<tr><td>USDTK(WCG2)</td><td>WCG2</td><td>2</td><td>11164589766816208741</td></tr>
+<tr><td>USDT(Omni)</td><td>BTC</td><td>8</td><td>31</td></tr>
+<tr><td>USO</td><td>ETH</td><td>8</td><td>0x6c2428a17bb9074f93563575d9c5c492f268cfb4</td></tr>
+<tr><td>VAR</td><td>ETH</td><td>18</td><td>0x828bfe8d626695a75184aa9b35cbdd1ec3eafaae</td></tr>
+<tr><td>VNS</td><td>ETH</td><td>18</td><td>0x1e4e36b3f011d862fd70006804da8fcefe89d3d8</td></tr>
+<tr><td>WCG2</td><td></td><td>8</td><td></td></tr>
+<tr><td>WEN(WCG2)</td><td>WCG2</td><td>4</td><td>8342642094929787676</td></tr>
+<tr><td>WOS(WCG2)</td><td>WCG2</td><td>4</td><td>411043316357352222</td></tr>
+<tr><td>XLP</td><td>ETH</td><td>2</td><td>0x18017350089c7219f5b9a9b704c459c1a2814063</td></tr>
+<tr><td>XMC</td><td></td><td>0</td><td></td></tr>
+<tr><td>XMR</td><td></td><td>12</td><td></td></tr>
+<tr><td>XNS</td><td>ETH</td><td>18</td><td>0xbf2f1e0e41f1e144bb1d5870e94324b9878dd95b</td></tr>
+<tr><td>XRP</td><td></td><td>6</td><td></td></tr>
+<tr><td>XRT</td><td>ETH</td><td>18</td><td>0x37d404a072056eda0cd10cb714d35552329f8500</td></tr>
+<tr><td>XT</td><td>ETH</td><td>18</td><td>0x528d068ae69e90c90ad090b3c2b0d18241e9e9b5</td></tr>
+<tr><td>ZRX</td><td>ETH</td><td>18</td><td>0xe41d2489571d322189246dafa5ebde1f4699f498</td></tr>
+</table>
 
 # Version
 
-Dabank v3.4-Beta 2018-09-27
+Dabank v3.4 2019-01
 
