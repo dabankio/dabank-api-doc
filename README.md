@@ -301,7 +301,7 @@ This API needs only basic auth param.
 ```json
 {  
   "key":"your_api_id",
-  "request_time":"1524290015",
+  "request_time":"current_time_in_unix_second",
   "sign":"data_signature",
   "start_time": "started_time_in_unix_second",
   "end_time": "ended_time_in_unix_second"

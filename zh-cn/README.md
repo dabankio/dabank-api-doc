@@ -269,7 +269,7 @@ data 里为 Array
 ]
 ```
 
-## Get Statistics of Your Transactions between a Time Range
+## 统计指定时间范围内的交易情况
 
 ```
 /api/v3/reconciliation
@@ -286,7 +286,7 @@ data 里为 Array
 ```json
 {  
   "key":"your_api_id",
-  "request_time":"1524290015",
+  "request_time":"current_time_in_unix_second",
   "sign":"data_signature",
   "start_time": "started_time_in_unix_second",
   "end_time": "ended_time_in_unix_second"
