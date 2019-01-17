@@ -269,6 +269,104 @@ data 里为 Array
 ]
 ```
 
+## Get Statistics of Your Transactions between a Time Range
+
+```
+/api/v3/reconciliation
+```
+
+* request:
+
+| key      | type     |  compulsory  | comment   |
+| ------ | ------ | ---- | ---------------- |
+| start_time | string | ✓   | 统计的开始时间（Unix秒，含本身） |
+| end_time | string | ✓   | 统计的截止时间（Unix秒，不含本身） |
+
+
+```json
+{  
+  "key":"your_api_id",
+  "request_time":"1524290015",
+  "sign":"data_signature",
+  "start_time": "started_time_in_unix_second",
+  "end_time": "ended_time_in_unix_second"
+}
+```
+
+* response:
+
+| key           | type     | comment            |
+| ------- | ------ | ------------- |
+| symbol  | string | 币种           |
+| token_of | string | 如果当前币种是主链的代币，这里会显示主链币的名称   |
+| fee | float64 | 这段时间的累计手续费，注意代币交易的手续费以主币记 |
+
+剩下的字段的意义比较明显，此处从略。
+
+```json
+{
+    "err_code": "",
+    "err_info": "",
+    "data": {
+        "statistics": [
+            {
+                "symbol": "XRP",
+                "token_of": "XRP",
+                "fee": 0.05,
+                "in_success_coin": 6586.9533,
+                "in_success_count": 8,
+                "in_pending_coin": 0,
+                "in_pending_count": 0,
+                "out_success_coin": 49063.930932,
+                "out_success_count": 5,
+                "out_fail_coin": 0,
+                "out_fail_count": 0,
+                "out_pending_coin": 0,
+                "out_pending_count": 0
+            },
+            {
+                "symbol": "ETH",
+                "token_of": "ETH",
+                "fee": 0.008,
+                "in_success_coin": 6.75548,
+                "in_success_count": 3,
+                "in_pending_coin": 0,
+                "in_pending_count": 0,
+                "out_success_coin": 1.9046887,
+                "out_success_count": 3,
+                "out_fail_coin": 0,
+                "out_fail_count": 0,
+                "out_pending_coin": 0,
+                "out_pending_count": 0
+            }
+        ],
+        "realtime_balance": [
+            {
+                "symbol": "XRP",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "USDT(Omni)",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "BTC",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "ETH",
+                "available_balance": 50000,
+                "freeze": 0
+            }
+        ]
+    },
+    "request_id": 134
+}
+```
+
 ## 验证地址正确性
 
 ```

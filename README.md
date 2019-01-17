@@ -284,6 +284,104 @@ This API needs only basic auth param.
 ]
 ```
 
+## Get Statistics of Your Transactions between a Time Range
+
+```
+/api/v3/reconciliation
+```
+
+* request:
+
+| key      | type     |  compulsory  | comment   |
+| ------ | ------ | ---- | ---------------- |
+| start_time | string | ✓   | starting time of the time range(included) |
+| end_time | string | ✓   | ending time of the time range(not included) |
+
+
+```json
+{  
+  "key":"your_api_id",
+  "request_time":"1524290015",
+  "sign":"data_signature",
+  "start_time": "started_time_in_unix_second",
+  "end_time": "ended_time_in_unix_second"
+}
+```
+
+* response:
+
+| key           | type     | comment            |
+| ------- | ------ | ------------- |
+| symbol  | string | symbol for coin type identification            |
+| token_of | string | is this symbol a token of another one? can be empty     |
+| fee | float64 | fee accumulated during this time range, in `symbol` if `token_of` is empty, in `token_of` otherwise |
+
+The rest keys should be self-documented.
+
+```json
+{
+    "err_code": "",
+    "err_info": "",
+    "data": {
+        "statistics": [
+            {
+                "symbol": "XRP",
+                "token_of": "XRP",
+                "fee": 0.05,
+                "in_success_coin": 6586.9533,
+                "in_success_count": 8,
+                "in_pending_coin": 0,
+                "in_pending_count": 0,
+                "out_success_coin": 49063.930932,
+                "out_success_count": 5,
+                "out_fail_coin": 0,
+                "out_fail_count": 0,
+                "out_pending_coin": 0,
+                "out_pending_count": 0
+            },
+            {
+                "symbol": "ETH",
+                "token_of": "ETH",
+                "fee": 0.008,
+                "in_success_coin": 6.75548,
+                "in_success_count": 3,
+                "in_pending_coin": 0,
+                "in_pending_count": 0,
+                "out_success_coin": 1.9046887,
+                "out_success_count": 3,
+                "out_fail_coin": 0,
+                "out_fail_count": 0,
+                "out_pending_coin": 0,
+                "out_pending_count": 0
+            }
+        ],
+        "realtime_balance": [
+            {
+                "symbol": "XRP",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "USDT(Omni)",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "BTC",
+                "available_balance": 50000,
+                "freeze": 0
+            },
+            {
+                "symbol": "ETH",
+                "available_balance": 50000,
+                "freeze": 0
+            }
+        ]
+    },
+    "request_id": 134
+}
+```
+
 ## Validate An Address
 
 Validate an address to ensure it is not malformed,
