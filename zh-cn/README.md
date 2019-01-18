@@ -298,8 +298,8 @@ data 里为 Array
 | key           | type     | comment            |
 | ------- | ------ | ------------- |
 | symbol  | string | 币种           |
-| token_of | string | 如果当前币种是主链的代币，这里会显示主链币的名称   |
-| fee | float64 | 这段时间的累计手续费，注意代币交易的手续费以主币记 |
+| fee_symbol | string | 计费币种   |
+| fee | float64 | 这段时间的累计手续费 |
 
 剩下的字段的意义比较明显，此处从略。
 
@@ -311,33 +311,33 @@ data 里为 Array
         "statistics": [
             {
                 "symbol": "XRP",
-                "token_of": "XRP",
-                "fee": 0.05,
-                "in_success_coin": 6586.9533,
-                "in_success_count": 8,
+                "fee_symbol": "XRP",
+                "fee": 0.43,
+                "in_successful_coin": 34819.302933,
+                "in_successful_count": 22,
                 "in_pending_coin": 0,
                 "in_pending_count": 0,
-                "out_success_coin": 49063.930932,
-                "out_success_count": 5,
-                "out_fail_coin": 0,
-                "out_fail_count": 0,
+                "out_successful_coin": 161692.215504,
+                "out_successful_count": 43,
+                "out_failed_coin": 0,
+                "out_failed_count": 0,
                 "out_pending_coin": 0,
                 "out_pending_count": 0
             },
             {
-                "symbol": "ETH",
-                "token_of": "ETH",
-                "fee": 0.008,
-                "in_success_coin": 6.75548,
-                "in_success_count": 3,
-                "in_pending_coin": 0,
-                "in_pending_count": 0,
-                "out_success_coin": 1.9046887,
-                "out_success_count": 3,
-                "out_fail_coin": 0,
-                "out_fail_count": 0,
-                "out_pending_coin": 0,
-                "out_pending_count": 0
+                            "symbol": "ETH",
+                            "fee_symbol": "ETH",
+                            "fee": 0.024,
+                            "in_successful_coin": 114.48484908,
+                            "in_successful_count": 9,
+                            "in_pending_coin": 0,
+                            "in_pending_count": 0,
+                            "out_successful_coin": 39.17130422,
+                            "out_successful_count": 6,
+                            "out_failed_coin": 0,
+                            "out_failed_count": 0,
+                            "out_pending_coin": 0,
+                            "out_pending_count": 0
             }
         ],
         "realtime_balance": [
