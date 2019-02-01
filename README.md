@@ -36,11 +36,11 @@ All APIs uses HTTP POST method, with `Content-Type`header `application/json; cha
 
 For every API following, these inputs are needed in request for authentication:
 
-| key           | type     | comment            |
-| ------------ | ------ | ------------- |
-| key          | string | key provides identity       |
-| sign         | string | SHA256-RSA data signature    |
-| request_time | string | current unix second |
+| key          | type   | comment                   |
+| ------------ | ------ | ------------------------- |
+| key          | string | key provides identity     |
+| sign         | string | SHA256-RSA data signature |
+| request_time | string | current unix second       |
 
 **keys**
 
@@ -84,11 +84,11 @@ HMAC-style Authentication is deprecated, which will be dropped in future.
 
 For every API following, these inputs are needed in request for authentication:
 
-| key           | type     | comment            |
-| ------------ | ------ | ------------- |
-| key          | string | key provides identity       |
-| sign         | string | HMAC-style data signature    |
-| request_time | string | current unix second |
+| key          | type   | comment                   |
+| ------------ | ------ | ------------------------- |
+| key          | string | key provides identity     |
+| sign         | string | HMAC-style data signature |
+| request_time | string | current unix second       |
 
 * Steps to generate `sign`(for API requests and Dabank callback verification)
 
@@ -101,28 +101,49 @@ For every API following, these inputs are needed in request for authentication:
 1. calculate md5 of `content` and you get `sign` of your current request.
 
 Documentations on above-mentioned authentication input are omitted
-from now on for brevity. 
+from now on for brevity.
 
 ## Response
 
 All responses are boxed in following object:
 
-| key           | type     | comment            |
-| ---------- | --------------- | ------------------------ |
-| err_code   | string          | code of error, empty when everything is fine |
-| err_info   | string          | description for error |
-| request_id | int     | id for request booking, 0 if it is not booked   |
-| data       | object/array | output of API         |
+| key        | type         | comment                                       |
+| ---------- | ------------ | --------------------------------------------- |
+| err_code   | string       | code of error, empty when everything is fine  |
+| err_info   | string       | description for error                         |
+| request_id | int          | id for request booking, 0 if it is not booked |
+| data       | object/array | output of API                                 |
 
 Example:
 
 ```json
-{ 
+{
     "err_code": "ERR_ACCT_NOT_EXIST",
     "err_info": "account not exist, check your key",
     "data":null
 }
 ```
+
+## List Of Response Error Codes
+
+| Error Code                      | Description                                                                                                | suggestions                                                                                                                                                           |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Err]SameWalletAddress          | (from地址与to地址相同) the `from` address is equals the to the `to` address                                | don't do this.                                                                                                                                                        |
+| [Err]AddressMismatchedApp       | (地址与app不匹配) the address is not belonging to the App                                                  | make sure that you are using a proper address of your account.                                                                                                        |
+| [Err]FromAndToNotBelonging      | (from和to地址都不是dabank管理的地址) both `from` address and `to` address are not being managed by DABank. | (from和to地址至少得有一个是被dabank管理着的) at least one of the addresses must be managed by DABank.                                                                 |
+| [Err]ServiceInternalError       | server internal error                                                                                      |                                                                                                                                                                       |
+| [Err]BadRequest                 | invalid parameter                                                                                          | (根据详细错误信息检查请求参数) see the response data of `err_info`                                                                                                    |
+| [Err]Unauthorized               | unauthorized                                                                                               | (检查鉴权所需参数是否正确设置) check the credential parameters.                                                                                                       |
+| [Err]UnsupportedSymbol          | (不支持该Symbol) unsupported symbol                                                                        | (停止该币种的支持) you should stop supporting this symbol.                                                                                                            |
+| [Err]BannedSymbol               | (symbol已临时禁用) the symbol is banned temporarily                                                        | (暂时停止该币种的支持) you should stop supporting this symbol temporarily.                                                                                            |
+| [Err]MalformedAddress           | invalid address                                                                                            | (检查请求参数中的地址是否正确。) check the address in parameters according to the address rules of the symbol.                                                        |
+| [Err]ErrIncorrectTransferAmount | invalid amount                                                                                             | (确保交易金额大于0；精度要符合对应币种的规格。) check if the transfer amount is greater than 0, and it is formated with the proper precision according to the symbol. |
+| [Err]OverDailyWithdrawalLimit   | (超过每日提币限制) over daily withdrawal limit                                                             |                                                                                                                                                                       |
+| [Err]AcctNotFound               | account not found                                                                                          | (检查参数中的地址是否与交易涉及的账户的地址匹配) check the address according to the entailed account.                                                                 |
+| [Err]InsufficientBalance        | (账户余额不足) not enough funds in account to kick off the processing of the request                       | make sure that your account have enough funds.                                                                                                                        |
+| [Err]InsufficientFunds          | (账户准备金不足) exceeds funds lower limit caused by the processing of the request                         | make sure that your account have enough funds.                                                                                                                        |
+| [Err]SmallWithdraw              | (低于最低提币下限) exceeds withdraw lower limit                                                            |                                                                                                                                                                       |
+| [Err]LargeWithdraw              | (超过最高提币上限) exceeds withdraw upper limit                                                            |                                                                                                                                                                       |
 
 ##  Param Style
 
@@ -156,13 +177,13 @@ APIs are hosted at `https://api.dabank.io/`.
 
 * request:
 
-| key      | type     |  compulsory  | comment   |
-| ------- | ------ | ---- | ---- |
-| symbol  | string | ✓    | symbol for coin type identification   |
-| user_id | string | ✓    | unique id to distinguish user, needs to be the same for one specific user |
+| key     | type   | compulsory | comment                                                                   |
+| ------- | ------ | ---------- | ------------------------------------------------------------------------- |
+| symbol  | string | ✓          | symbol for coin type identification                                       |
+| user_id | string | ✓          | unique id to distinguish user, needs to be the same for one specific user |
 
 ```json
-{  
+{
    "key":"your_api_id",
    "request_time":"1524290015",
    "sign":"data_signature",
@@ -173,15 +194,15 @@ APIs are hosted at `https://api.dabank.io/`.
 
 * response:
 
-| key           | type     | comment            |
-| ------- | ------ | ---- |
-| address | string | address for deposit   |
+| key     | type   | comment             |
+| ------- | ------ | ------------------- |
+| address | string | address for deposit |
 
 ```json
 {
    "err_code":"",
    "err_info":"",
-   "data":{  
+   "data":{
       "address":"0x12345678910388342390012323"
    },
    "request_id":233049
@@ -196,16 +217,16 @@ APIs are hosted at `https://api.dabank.io/`.
 
 * request:
 
-| key      | type     |  compulsory  | comment   |
-| --------- | ------ | ---- | ---------------------------------------- |
-| symbol    | string | ✓    | symbol for coin type identification  |
-| coins     | string | ✓    | amount to withdraw  |
-| to        | string | ✓    | destination address |
-| from      | string | ✓    | deposit address of the user withdrawing |
-| unique_id | string | ✓    | generated by you, unique for one specific transaction, use the same one if you are re-trying this withdraw for some reason |
+| key       | type   | compulsory | comment                                                                                                                    |
+| --------- | ------ | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| symbol    | string | ✓          | symbol for coin type identification                                                                                        |
+| coins     | string | ✓          | amount to withdraw                                                                                                         |
+| to        | string | ✓          | destination address                                                                                                        |
+| from      | string | ✓          | deposit address of the user withdrawing                                                                                    |
+| unique_id | string | ✓          | generated by you, unique for one specific transaction, use the same one if you are re-trying this withdraw for some reason |
 
 ```json
-{  
+{
    "unique_id":"must_be_unique_use_the_same_one_when_retrying",
    "to":"0x12345678910388342390012323",
    "sign":"data_signature",
@@ -219,18 +240,18 @@ APIs are hosted at `https://api.dabank.io/`.
 
 * response:
 
-| key           | type     | comment            |
-| ----------- | ------ | ---------------------------------------- |
-| transfer_id | string | internal transaction ID provided by Dabank, which you use to identity specific transaction  |
-| status      | string | status of transaction |
+| key         | type   | comment                                                                                    |
+| ----------- | ------ | ------------------------------------------------------------------------------------------ |
+| transfer_id | string | internal transaction ID provided by Dabank, which you use to identity specific transaction |
+| status      | string | status of transaction                                                                      |
 
 
 
 ```json
-{  
+{
    "err_code":"",
    "err_info":"",
-   "data":{  
+   "data":{
       "status":"TRANSFER_PENDING",
       "transfer_id":123
    },
@@ -249,12 +270,12 @@ APIs are hosted at `https://api.dabank.io/`.
 
 This API needs only basic auth param.
 
-| key      | type     |  compulsory  | comment   |
-| ------ | ------ | ---- | ---------------- |
-|  |  |  |  |
+| key | type | compulsory | comment |
+| --- | ---- | ---------- | ------- |
+|     |      |            |         |
 
 ```json
-{  
+{
   "key":"your_api_id",
   "request_time":"1524290015",
   "sign":"data_signature"
@@ -263,11 +284,11 @@ This API needs only basic auth param.
 
 * response:
 
-| key           | type     | comment            |
-| ------- | ------ | ------------- |
-| symbol  | string | symbol for coin type identification            |
-| address | string | your app exclusive address            |
-| balance | string | your real-time balance |
+| key     | type   | comment                             |
+| ------- | ------ | ----------------------------------- |
+| symbol  | string | symbol for coin type identification |
+| address | string | your app exclusive address          |
+| balance | string | your real-time balance              |
 
 ```json
 [
@@ -394,13 +415,13 @@ the correction of an address as withdrawal destination is guaranteed by your use
 
 * request:
 
-| key      | type     |  compulsory  | comment   |
-| ------- | ------ | ---- | ---- |
-| symbol  | string | ✓    | symbol for coin type identification   |
-| address | string | ✓    | address to be checked |
+| key     | type   | compulsory | comment                             |
+| ------- | ------ | ---------- | ----------------------------------- |
+| symbol  | string | ✓          | symbol for coin type identification |
+| address | string | ✓          | address to be checked               |
 
 ```json
-{  
+{
   "key":"your_api_id",
   "request_time":"1524290015",
   "sign":"data_signature",
@@ -411,13 +432,13 @@ the correction of an address as withdrawal destination is guaranteed by your use
 
 * response:
 
-| key           | type     | comment            |
-| ------- | ------ | --------------------------- |
+| key     | type   | comment                                                           |
+| ------- | ------ | ----------------------------------------------------------------- |
 | verify  | string | Validation result, `Success` means valid, `Failure` means invalid |
-| err_msg | string | when `Failure`, here lies the validation detail   |
+| err_msg | string | when `Failure`, here lies the validation detail                   |
 
 ```json
-{  
+{
   "verify":"Failure",
   "err_msg":"ETH address should be started with \"0x\""
 }
@@ -439,12 +460,12 @@ provides to Legacy format, in favor for users in need.
 
 * request:
 
-| key      | type     |  compulsory  | comment   |
-| ------- | ------ | ---- | -------- |
-| address | string | ✓    | BCH CashAddr or Legacy Address |
+| key     | type   | compulsory | comment                        |
+| ------- | ------ | ---------- | ------------------------------ |
+| address | string | ✓          | BCH CashAddr or Legacy Address |
 
 ```json
-{  
+{
   "key":"your_api_id",
   "request_time":"1524290015",
   "sign":"data_signature",
@@ -454,13 +475,13 @@ provides to Legacy format, in favor for users in need.
 
 * response:
 
-| key           | type     | comment            |
-| ------- | ------ | ------------------------------------ |
-| legacy_addr  | string | your input in Legacy Address format |
-| cash_addr | string | your input in CashAddr format(starting with `bitcoincash:` which is a inseparable part of address, do not drop that) |
+| key         | type   | comment                                                                                                              |
+| ----------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| legacy_addr | string | your input in Legacy Address format                                                                                  |
+| cash_addr   | string | your input in CashAddr format(starting with `bitcoincash:` which is a inseparable part of address, do not drop that) |
 
 ```json
-{  
+{
   "legacy_addr":"1BpEi6DfDAUFd7GtittLSdBeYJvcoaVggu",
   "cash_addr":"bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a"
 }
@@ -478,7 +499,7 @@ which is triggered in these cases:
 * withdrawal
   * the confirmation count of a pending withdrawal changes
   * the confirmation count of a previously pending withdrawal changes, which makes it confirmed
-  
+
 ## Security Note
 
 Dabank uses your secret key to generate data signature in the way mentioned in APIs chapter.
@@ -486,26 +507,26 @@ Check `sign` to avoid phishing, see chapter "Authentication".
 
 ## HTTP POST Request from Dabank
 
-| key           | type     | comment            |
-| ------------- | ------ | ---------------------------------------- |
-| transfer_id   | string | internal transaction ID provided by Dabank, which you use to identity specific transaction |
-| symbol        | string | symbol for coin type identification |
-| confirms      | string | confirmation count(not applicable for off-chain internal transaction in Dabank) |
-| tx_id         | string | transaction ID on cryptocurrency network   |
-| transfer_at   | string | unix second of transaction initialization  |
-| confirm_at    | string | unix second of transaction final confirmation  |
-| status        | string | status of transaction |
-| transfer_type | string | `IN` for incoming deposit, `OUT` for outgoing withdrawal  |
-| to            | string | transaction destination address  |
-| from          | string | transaction address of departure, may be empty when deposit |
-| coins         | string | amount of transaction, whose max precision is 8 decimals  |
-| fee           | string | fee charged to you for this specific transaction  |
+| key           | type   | comment                                                                                             |
+| ------------- | ------ | --------------------------------------------------------------------------------------------------- |
+| transfer_id   | string | internal transaction ID provided by Dabank, which you use to identity specific transaction          |
+| symbol        | string | symbol for coin type identification                                                                 |
+| confirms      | string | confirmation count(not applicable for off-chain internal transaction in Dabank)                     |
+| tx_id         | string | transaction ID on cryptocurrency network                                                            |
+| transfer_at   | string | unix second of transaction initialization                                                           |
+| confirm_at    | string | unix second of transaction final confirmation                                                       |
+| status        | string | status of transaction                                                                               |
+| transfer_type | string | `IN` for incoming deposit, `OUT` for outgoing withdrawal                                            |
+| to            | string | transaction destination address                                                                     |
+| from          | string | transaction address of departure, may be empty when deposit                                         |
+| coins         | string | amount of transaction, whose max precision is 8 decimals                                            |
+| fee           | string | fee charged to you for this specific transaction                                                    |
 | fee_symbol    | string | the symbol of fee charged, normally we charge the mainnet coin for token withdrawal on that network |
 
 * Callback request example on a withdrawal:
 
 ```json
-{  
+{
    "transfer_id":"1365850",
    "symbol":"BTC",
    "tx_id":"7cee2e2055c85d40ab27f713d1bbcd7db2d07a8ab54483e7c423ed6cdc689007",
@@ -528,7 +549,7 @@ Check `sign` to avoid phishing, see chapter "Authentication".
 * Callback request example on a successful withdrawal:
 
 ```json
-{  
+{
    "transfer_id":"1365848",
    "symbol":"MGD",
    "tx_id":"bc2929b14ea303e198517d1550e30e1b8125f5f16fb373f7407f8a48cf605c7a",
@@ -551,7 +572,7 @@ Check `sign` to avoid phishing, see chapter "Authentication".
 * Callback request example on a successful deposit:
 
 ```json
-{  
+{
    "transfer_id":"1365849",
    "symbol":"ETH",
    "tx_id":"0x4ce2767bb3d039a5c62860cf51aec489ab1e287e62e9c60d1723186aee105bc7",
@@ -575,12 +596,12 @@ Check `sign` to avoid phishing, see chapter "Authentication".
 
 You need to response to HTTP request from Dabank with following content:
 
-| key           | type     | comment            |
-| ------ | ------ | ------------------------ |
+| key    | type   | comment                                                                              |
+| ------ | ------ | ------------------------------------------------------------------------------------ |
 | result | string | `Success` when everything is fine, you may put error message when there is a problem |
 
 ```json
-{  
+{
    "result":"Success"
 }
 ```
@@ -619,7 +640,7 @@ like above mentioned.
 
 # Symbols Supported
 
-Note: max decimals APIs and callbacks supported is 8. 
+Note: max decimals APIs and callbacks supported is 8.
 
 <table border="0" style="border-collapse:collapse; text-align: center;">
 <tr><th>symbol</th><th>token_of</th><th>decimals</th><th>contract_address</th></tr>
