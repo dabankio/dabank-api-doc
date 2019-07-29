@@ -130,7 +130,8 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 
 # 接口列表
 
-Dabank API位于`https://api.dabank.io/`.
+* DaBank 测试环境API位于`https://api-test.dabank.cf/`
+* Dabank 正式环境API位于`https://api.dabank.io/`.
 
 ## 转入地址申请
 
