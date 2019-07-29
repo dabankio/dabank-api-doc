@@ -145,8 +145,8 @@ Status of transactions, including deposit and withdrawal, could be:
   * deposit callback: seldom, the deposit is considered invalid(most likely due to a network fork), note you may get several `TRANSFER_PENDING` callbacks before this.
 
 # APIs
-
-APIs are hosted at `https://api.dabank.io/`.
+test-APIs are hosted at `https://api.dabank.io/`.
+formal-APIs are hosted at `https://api.dabank.io/`.
 
 ## Deposit Address Application
 
