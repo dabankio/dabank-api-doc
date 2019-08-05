@@ -146,7 +146,7 @@ Status of transactions, including deposit and withdrawal, could be:
 
 # APIs
 
-* test-APIs are hosted at `https://api-test.dabank.cf/`.
+* test-APIs are hosted at `http://dabank.gnway.cc:28080`.
 * formal-APIs are hosted at `https://api.dabank.io/`.
 
 ## Deposit Address Application
