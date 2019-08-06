@@ -185,7 +185,7 @@ HMAC风格的签名方案已被废弃，仅作为现有应用的过渡期兼容�
 | 名称        | 类型     | 必传   | 说明                                       |
 | --------- | ------ | ---- | ---------------------------------------- |
 | symbol    | string | ✓    | 币种                                       |
-| coins     | string | ✓    | 转账币数  |
+| coins     | string | ✓    | 转账币数，小数位不能超过DABank设置的小数位  |
 | to        | string | ✓    | 提币目标地址                                   |
 | from      | string | ✓    | 提币发起地址                                     |
 | unique_id | string | ✓    | 调用方生成对本操作的唯一ID，如果应用打算重试同一笔交易，需要提供相同的`unique_id` |
@@ -481,7 +481,7 @@ Dabank知晓部分交易所还不支持提币到CashAddr地址，
 | transfer_type | string | 转账类型 IN(转入) OUT(转出)                      |
 | to            | string | 转入地址                                     |
 | from          | string | 转出地址, 类型为转入(IN)时可能为空                     |
-| coins         | string | 转账币数. 精度为小数点后8位                          |
+| coins         | string | 转账币数. 小数位超过8位的，只支持8位，小数位小于8位的，只支持实际的小数位                          |
 | fee           | string | 手续费                                      |
 | fee_symbol    | string | 手续费扣费币种                                  |
 
